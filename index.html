@@ -1,0 +1,1488 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agir ensemble · Semaine des lycées français du monde 2026</title>
+  <meta name="description" content="Site interactif de prévention du harcèlement et du cyberharcèlement pour la Semaine des lycées français du monde 2026. Quiz, conseils, ressources 3018." />
+  <meta name="theme-color" content="#07070c" />
+  <meta name="color-scheme" content="dark" />
+  <meta property="og:title" content="Agir ensemble — Prévenir le harcèlement" />
+  <meta property="og:description" content="Quiz, conseils et ressources pour prévenir le harcèlement et le cyberharcèlement. Semaine LFM 2026." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22%23818cf8%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23e879f9%22/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect%20width%3D%2232%22%20height%3D%2232%22%20rx%3D%228%22%20fill%3D%22%230c0e14%22/%3E%3Cpath%20fill%3D%22url%28%23g%29%22%20d%3D%22M16%204.5c-3.2%201.6-6.8%202.4-10%202.6v7.2c0%205.9%203.9%2011.3%2010%2013.2%206.1-1.9%2010-7.3%2010-13.2V7.1c-3.2-.2-6.8-1-10-2.6z%22/%3E%3Cpath%20fill%3D%22%230c0e14%22%20d%3D%22M14.2%2019.8l-3.1-3.1%201.4-1.4%201.7%201.7%204.3-4.3%201.4%201.4-5.7%205.7z%22/%3E%3C/svg%3E" />
+  <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22%23818cf8%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23e879f9%22/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect%20width%3D%2232%22%20height%3D%2232%22%20rx%3D%228%22%20fill%3D%22%230c0e14%22/%3E%3Cpath%20fill%3D%22url%28%23g%29%22%20d%3D%22M16%204.5c-3.2%201.6-6.8%202.4-10%202.6v7.2c0%205.9%203.9%2011.3%2010%2013.2%206.1-1.9%2010-7.3%2010-13.2V7.1c-3.2-.2-6.8-1-10-2.6z%22/%3E%3Cpath%20fill%3D%22%230c0e14%22%20d%3D%22M14.2%2019.8l-3.1-3.1%201.4-1.4%201.7%201.7%204.3-4.3%201.4%201.4-5.7%205.7z%22/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #07070c;
+      --text: #f4f4f8;
+      --muted: #9b9bb0;
+      --glass: rgba(255,255,255,0.045);
+      --glass-border: rgba(255,255,255,0.09);
+      --accent: #8b7cf6;
+      --success: #34d399;
+      --danger: #f87171;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Geist', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    ::selection {
+      background: rgba(129,140,248,0.35);
+      color: #fff;
+    }
+    .skip-link {
+      position: absolute;
+      left: -999px;
+      top: 0;
+      z-index: 200;
+      padding: 0.6rem 1rem;
+      background: #6366f1;
+      color: #fff;
+      font-weight: 600;
+      font-size: 0.9rem;
+      border-radius: 0 0 8px 0;
+      text-decoration: none;
+    }
+    .skip-link:focus {
+      left: 0;
+    }
+    :focus-visible {
+      outline: 2px solid #a78bfa;
+      outline-offset: 3px;
+    }
+    button:focus:not(:focus-visible),
+    a:focus:not(:focus-visible) {
+      outline: none;
+    }
+
+    /* ===== MESH + PARALLAX ===== */
+    .mesh {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(110px);
+      opacity: 0.42;
+      will-change: transform;
+      transition: opacity 0.8s ease;
+    }
+    .blob-1 {
+      width: 55vw; height: 55vw; max-width: 720px; max-height: 720px;
+      background: #4f46e5; top: -18%; left: -12%;
+    }
+    .blob-2 {
+      width: 45vw; height: 45vw; max-width: 560px; max-height: 560px;
+      background: #c026d3; top: 12%; right: -18%;
+    }
+    .blob-3 {
+      width: 40vw; height: 40vw; max-width: 500px; max-height: 500px;
+      background: #0ea5e9; bottom: 0%; left: 20%; opacity: 0.28;
+    }
+    .blob-4 {
+      width: 32vw; height: 32vw; max-width: 380px; max-height: 380px;
+      background: #ec4899; bottom: -8%; right: 8%; opacity: 0.22;
+    }
+
+    .noise {
+      position: fixed; inset: 0; z-index: 1; pointer-events: none; opacity: 0.03;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    .scroll-bar {
+      position: fixed; top: 0; left: 0; height: 2px; width: 0%;
+      background: linear-gradient(90deg, #6366f1, #c026d3, #0ea5e9);
+      z-index: 100; transition: width 0.05s linear;
+    }
+
+    /* Reveal cascade */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal.on { opacity: 1; transform: translateY(0); }
+    .d1 { transition-delay: 0.07s; }
+    .d2 { transition-delay: 0.14s; }
+    .d3 { transition-delay: 0.21s; }
+    .d4 { transition-delay: 0.28s; }
+
+    .wrap {
+      position: relative; z-index: 2;
+      max-width: 880px; margin: 0 auto; padding: 0 1.5rem;
+    }
+
+    /* Header */
+    header {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(7,7,12,0.55);
+      backdrop-filter: blur(22px) saturate(1.6);
+      border-bottom: 1px solid var(--glass-border);
+    }
+    .nav {
+      max-width: 880px; margin: 0 auto; padding: 1rem 1.5rem;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .logo {
+      font-weight: 700; font-size: 1rem; color: var(--text);
+      text-decoration: none; display: flex; align-items: center; gap: 0.55rem;
+    }
+    .logo-dot {
+      width: 9px; height: 9px; border-radius: 50%;
+      background: linear-gradient(135deg, #818cf8, #e879f9);
+      box-shadow: 0 0 14px rgba(129,140,248,0.7);
+      animation: pulseDot 2.8s ease-in-out infinite;
+    }
+    @keyframes pulseDot {
+      0%, 100% { box-shadow: 0 0 10px rgba(129,140,248,0.45); transform: scale(1); }
+      50% { box-shadow: 0 0 18px rgba(232,121,249,0.7); transform: scale(1.12); }
+    }
+    body.rm .logo-dot { animation: none; }
+    .nav-help {
+      font-size: 0.82rem; font-weight: 600; color: #c4b5fd;
+      text-decoration: none; padding: 0.4rem 0.95rem; border-radius: 999px;
+      border: 1px solid rgba(167,139,250,0.3);
+      transition: background 0.2s, border-color 0.2s, box-shadow 0.2s;
+    }
+    .nav-help:hover {
+      background: rgba(167,139,250,0.12);
+      border-color: rgba(167,139,250,0.5);
+      box-shadow: 0 0 20px rgba(167,139,250,0.2);
+    }
+
+    /* Section head (no sticky — avoids color glitches) */
+    .sticky-head {
+      padding: 0.2rem 0 0.4rem;
+      margin-bottom: 0.3rem;
+    }
+
+    /* Hero */
+    .hero { padding: 5.5rem 0 4rem; text-align: center; }
+    .tag {
+      display: inline-block; font-family: 'Geist Mono', monospace;
+      font-size: 0.7rem; font-weight: 500; letter-spacing: 0.06em;
+      text-transform: uppercase; color: #c4b5fd;
+      background: rgba(167,139,250,0.12); border: 1px solid rgba(167,139,250,0.2);
+      padding: 0.35rem 0.9rem; border-radius: 999px; margin-bottom: 1.6rem;
+    }
+    .hero h1 {
+      font-size: clamp(2.4rem, 6vw, 3.5rem); font-weight: 700;
+      line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 1.1rem;
+      color: #f4f4f8;
+    }
+    .hero h1 span {
+      background: linear-gradient(120deg, #818cf8 0%, #e879f9 45%, #38bdf8 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .hero p { color: var(--muted); font-size: 1.1rem; max-width: 400px; margin: 0 auto 2rem; }
+    .hero-btns { display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      padding: 0.85rem 1.5rem; border-radius: 999px;
+      font-weight: 600; font-size: 0.9rem; font-family: inherit;
+      border: none; cursor: pointer; text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.25s, background 0.2s;
+    }
+    .btn-main {
+      background: linear-gradient(135deg, #6366f1, #a855f7); color: white;
+      box-shadow: 0 0 0 1px rgba(255,255,255,0.1) inset, 0 10px 30px -10px rgba(99,102,241,0.55);
+    }
+    .btn-main:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 0 1px rgba(255,255,255,0.15) inset, 0 14px 40px -8px rgba(99,102,241,0.7), 0 0 30px rgba(168,85,247,0.25);
+    }
+    .btn-ghost {
+      background: var(--glass); color: var(--text);
+      border: 1px solid var(--glass-border); backdrop-filter: blur(8px);
+    }
+    .btn-ghost:hover {
+      background: rgba(255,255,255,0.08);
+      box-shadow: 0 0 24px rgba(167,139,250,0.15);
+    }
+
+    section { padding: 3.2rem 0; }
+    .title {
+      font-size: 1.5rem; font-weight: 700; text-align: center;
+      letter-spacing: -0.02em; margin-bottom: 0.35rem;
+      color: #f4f4f8 !important;
+    }
+    .sub {
+      text-align: center;
+      color: #9b9bb0 !important;
+      font-size: 0.92rem;
+      margin-bottom: 1.6rem;
+    }
+
+    .glass {
+      background: var(--glass); border: 1px solid var(--glass-border);
+      border-radius: 18px; backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+    }
+
+    /* Cards */
+    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    @media (max-width: 700px) { .cards { grid-template-columns: 1fr; } }
+    .card {
+      padding: 1.4rem 1.25rem;
+      transition: transform 0.3s, border-color 0.3s, background 0.3s, box-shadow 0.3s;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(167,139,250,0.3);
+      background: rgba(255,255,255,0.07);
+      box-shadow: 0 0 40px rgba(129,140,248,0.12);
+    }
+    .card-ico {
+      width: 42px; height: 42px; border-radius: 12px; display: grid; place-items: center;
+      font-size: 1.25rem; margin-bottom: 0.9rem;
+      background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border);
+    }
+    .card h3 { font-size: 1rem; font-weight: 600; margin-bottom: 0.35rem; }
+    .card p { color: var(--muted); font-size: 0.875rem; }
+
+    .callout {
+      margin-top: 1.5rem; padding: 2rem 1.5rem; text-align: center; position: relative; overflow: hidden;
+    }
+    .callout-num {
+      font-size: 3.4rem; font-weight: 700; letter-spacing: -0.03em;
+      background: linear-gradient(120deg, #818cf8, #e879f9, #38bdf8);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; line-height: 1;
+    }
+    .callout p { color: var(--muted); font-size: 0.92rem; margin-top: 0.5rem; }
+
+    /* ===== MYTHES FLIP ===== */
+    .myths {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+    }
+    @media (max-width: 600px) { .myths { grid-template-columns: 1fr; } }
+    .flip {
+      perspective: 1200px; height: 160px; cursor: pointer;
+    }
+    .flip-inner {
+      position: relative; width: 100%; height: 100%;
+      transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease;
+      transform-style: preserve-3d;
+    }
+    .flip:hover .flip-inner {
+      box-shadow: 0 12px 40px -12px rgba(129,140,248,0.35);
+    }
+    .flip.flipped .flip-inner {
+      transform: rotateY(180deg) scale(1.02);
+      box-shadow: 0 16px 48px -12px rgba(129,140,248,0.4);
+    }
+    .flip-face {
+      position: absolute; inset: 0; backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      border-radius: 16px; padding: 1.2rem 1.15rem;
+      display: flex; flex-direction: column; justify-content: center;
+      border: 1px solid var(--glass-border); background: var(--glass);
+      backdrop-filter: blur(12px);
+      transition: border-color 0.3s;
+    }
+    .flip-back {
+      transform: rotateY(180deg);
+      background: rgba(129,140,248,0.12);
+      border-color: rgba(129,140,248,0.3);
+    }
+    .flip-label {
+      font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.05em; margin-bottom: 0.45rem;
+    }
+    .flip-label.myth { color: #f87171; }
+    .flip-label.real { color: #34d399; }
+    .flip-face h4 { font-size: 0.95rem; font-weight: 600; line-height: 1.35; }
+    .flip-face p { font-size: 0.85rem; color: var(--muted); margin-top: 0.35rem; }
+    .flip-hint {
+      font-size: 0.7rem; color: var(--muted); margin-top: 0.5rem; opacity: 0.7;
+    }
+
+    /* Quiz */
+    .quiz { max-width: 560px; margin: 0 auto; padding: 1.6rem; }
+    .bar {
+      height: 3px; background: rgba(255,255,255,0.06); border-radius: 99px;
+      overflow: hidden; margin-bottom: 1.4rem;
+    }
+    .bar > i {
+      display: block; height: 100%; width: 0%;
+      background: linear-gradient(90deg, #6366f1, #e879f9);
+      border-radius: 99px; transition: width 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .q { font-size: 1.1rem; font-weight: 600; margin-bottom: 1.15rem; line-height: 1.4; }
+    .opts { display: flex; flex-direction: column; gap: 0.55rem; }
+    .opt {
+      width: 100%; text-align: left; padding: 0.9rem 1.05rem; border-radius: 12px;
+      border: 1px solid var(--glass-border); background: rgba(255,255,255,0.02);
+      color: var(--text); font-family: inherit; font-size: 0.9rem; cursor: pointer;
+      transition: 0.2s;
+    }
+    .opt:hover:not(:disabled) {
+      border-color: rgba(167,139,250,0.4); background: rgba(167,139,250,0.08);
+      transform: translateX(4px); box-shadow: 0 0 20px rgba(167,139,250,0.1);
+    }
+    .opt.ok {
+      border-color: var(--success); background: rgba(52,211,153,0.12);
+      animation: pulseOk 0.4s ease;
+    }
+    .opt.ko { border-color: var(--danger); background: rgba(248,113,113,0.1); }
+    @keyframes pulseOk {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.02); }
+      100% { transform: scale(1); }
+    }
+    .fb {
+      display: none; margin-top: 0.95rem; padding: 0.8rem 1rem;
+      border-radius: 10px; font-size: 0.875rem;
+    }
+    .fb.show { display: block; animation: up 0.35s ease; }
+    .fb.good { background: rgba(52,211,153,0.1); color: #6ee7b7; }
+    .fb.bad { background: rgba(248,113,113,0.1); color: #fca5a5; }
+    @keyframes up {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: none; }
+    }
+    .quiz-foot {
+      display: flex; justify-content: space-between; align-items: center; margin-top: 1.3rem;
+    }
+    .score { font-size: 0.875rem; font-weight: 600; color: #c4b5fd; }
+
+    /* Tabs */
+    .tabs {
+      display: flex; gap: 0.4rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1.15rem;
+    }
+    .tab {
+      padding: 0.5rem 1.1rem; border-radius: 999px; border: 1px solid var(--glass-border);
+      background: transparent; color: var(--muted); font-size: 0.85rem; font-weight: 500;
+      cursor: pointer; font-family: inherit; transition: 0.2s;
+    }
+    .tab.on {
+      background: rgba(167,139,250,0.15); border-color: rgba(167,139,250,0.4); color: #c4b5fd;
+      box-shadow: 0 0 18px rgba(167,139,250,0.15);
+    }
+    .panel {
+      display: none; padding: 1.4rem; animation: up 0.35s ease;
+    }
+    .panel.on { display: block; }
+    .panel h3 { font-size: 1.05rem; font-weight: 600; margin-bottom: 0.4rem; }
+    .panel > p { color: var(--muted); font-size: 0.9rem; margin-bottom: 0.95rem; }
+    .panel ul { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+    .panel li {
+      display: flex; gap: 0.55rem; align-items: flex-start; font-size: 0.875rem;
+      padding: 0.7rem 0.85rem; background: rgba(255,255,255,0.03);
+      border-radius: 10px; border: 1px solid transparent; transition: border-color 0.2s;
+    }
+    .panel li:hover { border-color: var(--glass-border); }
+    .panel li::before { content: "→"; color: #a78bfa; font-weight: 600; flex-shrink: 0; }
+
+    /* Checklist */
+    .check { max-width: 480px; margin: 0 auto; padding: 1.25rem 1.35rem; }
+    .check-row {
+      display: flex; align-items: center; gap: 0.75rem; padding: 0.7rem 0;
+      border-bottom: 1px solid var(--glass-border); cursor: pointer; font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+    .check-row:last-of-type { border-bottom: none; }
+    .check-row input {
+      width: 18px; height: 18px; accent-color: #818cf8; cursor: pointer; flex-shrink: 0;
+      transition: transform 0.2s;
+    }
+    .check-row input:checked { transform: scale(1.15); }
+    .check-row.done { color: var(--muted); text-decoration: line-through; }
+    .check-n {
+      text-align: center; margin-top: 0.9rem; font-size: 0.85rem;
+      font-weight: 600; color: #c4b5fd;
+      transition: color 0.3s, transform 0.3s;
+    }
+    .check.complete {
+      border-color: rgba(52,211,153,0.35);
+      box-shadow: 0 0 40px rgba(52,211,153,0.12);
+    }
+    .check.complete .check-n {
+      color: #6ee7b7;
+    }
+    .check-done-msg {
+      display: none;
+      text-align: center;
+      margin-top: 0.75rem;
+      padding: 0.7rem 0.9rem;
+      border-radius: 10px;
+      background: rgba(52,211,153,0.1);
+      color: #6ee7b7;
+      font-size: 0.875rem;
+      font-weight: 600;
+      animation: up 0.4s ease;
+    }
+    .check-done-msg.show { display: block; }
+
+    /* Resources */
+    .res { display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem; }
+    @media (max-width: 520px) { .res { grid-template-columns: 1fr; } }
+    .res-card {
+      padding: 1.35rem; text-align: center;
+      transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+    }
+    .res-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(167,139,250,0.3);
+      box-shadow: 0 0 35px rgba(129,140,248,0.12);
+    }
+    .res-card .n {
+      font-size: 2rem; font-weight: 700;
+      background: linear-gradient(120deg, #818cf8, #e879f9);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .res-card h3 { font-size: 0.95rem; font-weight: 600; margin: 0.3rem 0; }
+    .res-card p { color: var(--muted); font-size: 0.82rem; margin-bottom: 0.65rem; }
+    .res-card a {
+      color: #c4b5fd; font-weight: 600; font-size: 0.85rem; text-decoration: none;
+    }
+    .res-card a:hover { text-decoration: underline; }
+
+    /* Pledge + Share */
+    .pledge {
+      max-width: 480px; margin: 0 auto; padding: 1.8rem 1.5rem; text-align: center;
+    }
+    .pledge h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 0.45rem; }
+    .pledge > p { color: var(--muted); font-size: 0.9rem; margin-bottom: 1.1rem; }
+    .pledge label {
+      display: flex; gap: 0.6rem; text-align: left; align-items: flex-start;
+      background: rgba(0,0,0,0.3); padding: 0.85rem 1rem; border-radius: 12px;
+      margin-bottom: 1rem; cursor: pointer; font-size: 0.875rem;
+    }
+    .pledge input {
+      margin-top: 0.15rem; accent-color: #818cf8; width: 17px; height: 17px;
+    }
+    .pledge-ok {
+      display: none; margin-top: 0.9rem; padding: 0.75rem;
+      background: rgba(52,211,153,0.1); border-radius: 10px;
+      color: #6ee7b7; font-weight: 600; font-size: 0.875rem;
+    }
+    .pledge-ok.show { display: block; animation: up 0.4s ease; }
+
+    /* Floating 3018 */
+    .fab {
+      position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 60;
+      display: flex; align-items: center; gap: 0.5rem;
+      padding: 0.75rem 1.15rem; border-radius: 999px;
+      background: linear-gradient(135deg, #6366f1, #a855f7);
+      color: white; font-weight: 700; font-size: 0.9rem;
+      text-decoration: none;
+      box-shadow: 0 8px 28px -6px rgba(99,102,241,0.55), 0 0 0 1px rgba(255,255,255,0.1) inset;
+      transition: transform 0.2s, box-shadow 0.25s;
+    }
+    .fab:hover {
+      transform: translateY(-3px) scale(1.03);
+      box-shadow: 0 12px 36px -6px rgba(99,102,241,0.65), 0 0 30px rgba(168,85,247,0.3);
+    }
+    .fab span { font-size: 0.75rem; font-weight: 500; opacity: 0.9; }
+
+    .to-top {
+      position: fixed; bottom: 1.5rem; left: 1.5rem; z-index: 60;
+      width: 44px; height: 44px; border-radius: 50%;
+      border: 1px solid var(--glass-border);
+      background: rgba(7,7,12,0.75);
+      backdrop-filter: blur(12px);
+      color: var(--text);
+      font-size: 1.15rem;
+      cursor: pointer;
+      display: grid; place-items: center;
+      opacity: 0; pointer-events: none;
+      transform: translateY(8px);
+      transition: opacity 0.25s, transform 0.25s, box-shadow 0.25s, border-color 0.2s;
+    }
+    .to-top.show {
+      opacity: 1; pointer-events: auto; transform: translateY(0);
+    }
+    .to-top:hover {
+      border-color: rgba(167,139,250,0.45);
+      box-shadow: 0 0 24px rgba(129,140,248,0.2);
+    }
+
+    /* ===== Affichage accessible ===== */
+    /* Lisibilité dans le header — ne masque jamais le contenu */
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+    }
+    .a11y-wrap {
+      position: relative;
+      z-index: 70;
+    }
+    .a11y-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      border: 1px solid var(--glass-border);
+      background: rgba(255,255,255,0.04);
+      color: var(--muted);
+      font-family: inherit;
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 0.4rem 0.75rem;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+    }
+    .a11y-toggle:hover {
+      color: var(--text);
+      border-color: rgba(167,139,250,0.4);
+      background: rgba(167,139,250,0.08);
+    }
+    .a11y-toggle .aa {
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      background: linear-gradient(135deg, #818cf8, #e879f9);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .a11y-panel {
+      display: none;
+      position: absolute;
+      top: calc(100% + 0.45rem);
+      right: 0;
+      flex-direction: column;
+      gap: 0.2rem;
+      padding: 0.4rem;
+      border-radius: 14px;
+      background: rgba(12,14,20,0.95);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(18px);
+      box-shadow: 0 16px 40px -12px rgba(0,0,0,0.65);
+      min-width: 200px;
+      animation: a11yIn 0.2s ease;
+    }
+    .a11y-wrap.open .a11y-panel { display: flex; }
+    @keyframes a11yIn {
+      from { opacity: 0; transform: translateY(-4px); }
+      to { opacity: 1; transform: none; }
+    }
+    .a11y-btn {
+      border: none;
+      background: transparent;
+      color: var(--muted);
+      font-family: inherit;
+      font-size: 0.82rem;
+      font-weight: 600;
+      padding: 0.55rem 0.85rem;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+      text-align: left;
+      width: 100%;
+    }
+    .a11y-btn:hover { color: var(--text); background: rgba(255,255,255,0.06); }
+    .a11y-btn.on {
+      background: rgba(129,140,248,0.18);
+      color: #c4b5fd;
+    }
+
+    /* High contrast */
+    body.hc {
+      --bg: #000000;
+      --text: #ffffff;
+      --muted: #e5e5e5;
+      --glass: #111111;
+      --glass-border: #ffffff;
+      --accent: #ffff00;
+    }
+    body.hc .mesh, body.hc .noise { display: none; }
+    body.hc .glass {
+      background: #111;
+      border-color: #fff;
+      backdrop-filter: none;
+    }
+    body.hc .title, body.hc .hero h1, body.hc .q { color: #fff !important; }
+    body.hc .sub, body.hc .hero p, body.hc .card p { color: #e5e5e5 !important; }
+    body.hc .btn-main {
+      background: #ffff00;
+      color: #000;
+      box-shadow: none;
+    }
+    body.hc .btn-ghost, body.hc .tab, body.hc .opt {
+      border-color: #fff;
+      color: #fff;
+      background: #000;
+    }
+    body.hc .opt.ok { background: #003300; border-color: #00ff00; color: #00ff00; }
+    body.hc .opt.ko { background: #330000; border-color: #ff6666; color: #ffaaaa; }
+    body.hc .fab {
+      background: #ffff00;
+      color: #000;
+      box-shadow: none;
+    }
+    body.hc .nav-help { color: #ffff00; border-color: #ffff00; }
+    body.hc .callout-num, body.hc .res-card .n, body.hc .hero h1 span {
+      background: none;
+      -webkit-text-fill-color: #ffff00;
+      color: #ffff00;
+    }
+    body.hc .scroll-bar { background: #ffff00; }
+    body.hc .a11y-toggle, body.hc .a11y-panel {
+      background: #000; border-color: #fff; color: #fff;
+    }
+    body.hc .nav-help { color: #ffff00; border-color: #ffff00; }
+    body.hc .a11y-btn { color: #ccc; }
+    body.hc .a11y-btn.on { background: #ffff00; color: #000; }
+    body.hc .a11y-toggle .aa {
+      background: none; -webkit-text-fill-color: #ffff00; color: #ffff00;
+    }
+    body.hc .to-top { background: #000; border-color: #fff; color: #fff; }
+    body.hc .flip-face { background: #111; border-color: #fff; }
+    body.hc .flip-back { background: #1a1a00; border-color: #ffff00; }
+    body.hc .flip-label.myth { color: #ff8888; }
+    body.hc .flip-label.real { color: #88ff88; }
+
+    /* Texte agrandi — lisibilité renforcée */
+    body.lg {
+      font-size: 22px;
+      line-height: 1.75;
+    }
+    body.lg .wrap { max-width: 920px; }
+    body.lg .hero h1 {
+      font-size: clamp(2.6rem, 7vw, 3.8rem);
+      line-height: 1.15;
+      margin-bottom: 1.3rem;
+    }
+    body.lg .hero p { font-size: 1.25rem; max-width: 520px; }
+    body.lg .title { font-size: 2rem; margin-bottom: 0.5rem; }
+    body.lg .sub { font-size: 1.15rem; margin-bottom: 1.8rem; }
+    body.lg .card h3 { font-size: 1.2rem; }
+    body.lg .card p { font-size: 1.05rem; line-height: 1.65; }
+    body.lg .q { font-size: 1.35rem; line-height: 1.45; }
+    body.lg .opt {
+      font-size: 1.15rem;
+      padding: 1.1rem 1.2rem;
+      line-height: 1.45;
+    }
+    body.lg .panel h3 { font-size: 1.25rem; }
+    body.lg .panel > p { font-size: 1.1rem; }
+    body.lg .panel li { font-size: 1.1rem; padding: 0.85rem 1rem; }
+    body.lg .check-row { font-size: 1.15rem; padding: 0.9rem 0; }
+    body.lg .check-row input { width: 22px; height: 22px; }
+    body.lg .btn {
+      font-size: 1.15rem;
+      padding: 1.05rem 1.7rem;
+    }
+    body.lg .tab { font-size: 1rem; padding: 0.6rem 1.2rem; }
+    body.lg .flip { height: 200px; }
+    body.lg .flip-face h4 { font-size: 1.15rem; }
+    body.lg .flip-face p { font-size: 1.05rem; }
+    body.lg .callout-num { font-size: 4rem; }
+    body.lg .callout p { font-size: 1.15rem; }
+    body.lg .res-card .n { font-size: 2.4rem; }
+    body.lg .res-card h3 { font-size: 1.15rem; }
+    body.lg .res-card p { font-size: 1rem; }
+    body.lg .res-card a { font-size: 1.05rem; }
+    body.lg .pledge h3 { font-size: 1.4rem; }
+    body.lg .pledge > p, body.lg .pledge label { font-size: 1.1rem; }
+    body.lg .fab { font-size: 1.05rem; padding: 0.9rem 1.3rem; }
+    body.lg .a11y-btn { font-size: 0.9rem; padding: 0.55rem 0.85rem; }
+    body.lg .nav-help { font-size: 0.95rem; }
+    body.lg .logo { font-size: 1.15rem; }
+    body.lg .quiz-end h3 { font-size: 1.35rem; }
+    body.lg .quiz-end .score-big { font-size: 1.8rem; }
+    body.lg .quiz-end p, body.lg .quiz-end li { font-size: 1.1rem; }
+    body.lg .tag { font-size: 0.85rem; }
+
+    /* Reduced motion */
+    body.rm .blob { animation: none !important; }
+    body.rm .reveal {
+      opacity: 1 !important;
+      transform: none !important;
+      transition: none !important;
+    }
+    body.rm .flip-inner { transition-duration: 0.01ms !important; }
+    body.rm .opt, body.rm .card, body.rm .btn, body.rm .fab {
+      transition: none !important;
+    }
+    body.rm .bar > i { transition: none !important; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .blob { animation: none !important; }
+      .reveal { opacity: 1; transform: none; transition: none; }
+    }
+
+    /* Quiz end */
+    .quiz-end {
+      text-align: center;
+      padding: 0.5rem 0 0.2rem;
+    }
+    .quiz-end-icon {
+      width: 52px; height: 52px; border-radius: 50%;
+      margin: 0 auto 0.9rem;
+      display: grid; place-items: center;
+      background: rgba(52,211,153,0.12);
+      border: 1px solid rgba(52,211,153,0.3);
+      font-size: 1.4rem;
+    }
+    .quiz-end h3 {
+      font-size: 1.15rem; font-weight: 700; margin-bottom: 0.4rem;
+    }
+    .quiz-end .score-big {
+      font-size: 1.5rem; font-weight: 700; color: #c4b5fd; margin-bottom: 0.6rem;
+    }
+    .quiz-end p {
+      color: var(--muted); font-size: 0.9rem; margin-bottom: 1rem; line-height: 1.55;
+    }
+    .quiz-end ul {
+      list-style: none; text-align: left;
+      max-width: 340px; margin: 0 auto 1.2rem;
+      display: flex; flex-direction: column; gap: 0.4rem;
+    }
+    .quiz-end li {
+      font-size: 0.85rem; padding: 0.55rem 0.75rem;
+      background: rgba(255,255,255,0.03); border-radius: 8px;
+      display: flex; gap: 0.45rem;
+    }
+    .quiz-end li::before { content: "✓"; color: #34d399; font-weight: 700; }
+    .quiz-end-actions {
+      display: flex; gap: 0.6rem; justify-content: center; flex-wrap: wrap;
+    }
+
+
+
+    /* ===== MOBILE ===== */
+    @media (max-width: 640px) {
+      .wrap { padding: 0 1rem; }
+
+      .nav {
+        padding: 0.8rem 1rem;
+        gap: 0.75rem;
+      }
+      .logo { font-size: 0.92rem; }
+      .nav-help {
+        font-size: 0.78rem;
+        padding: 0.4rem 0.75rem;
+      }
+
+      .hero {
+        padding: 3.2rem 0 2.4rem;
+      }
+      .hero h1 {
+        font-size: clamp(1.85rem, 8.5vw, 2.45rem);
+        letter-spacing: -0.025em;
+      }
+      .hero p {
+        font-size: 0.98rem;
+        max-width: 100%;
+        margin-bottom: 1.5rem;
+      }
+      .hero-btns {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.6rem;
+      }
+      .hero-btns .btn {
+        width: 100%;
+        justify-content: center;
+        min-height: 48px;
+      }
+
+      section { padding: 2.2rem 0; }
+      .title { font-size: 1.28rem; }
+      .sub { font-size: 0.88rem; margin-bottom: 1.25rem; }
+
+      .cards {
+        grid-template-columns: 1fr;
+        gap: 0.7rem;
+      }
+      .card { padding: 1.15rem 1.05rem; }
+      .card-ico { width: 38px; height: 38px; font-size: 1.1rem; }
+
+      .callout { padding: 1.5rem 1.15rem; }
+      .callout-num { font-size: 2.8rem; }
+
+      .myths {
+        grid-template-columns: 1fr;
+        gap: 0.7rem;
+      }
+      .flip { height: 148px; }
+      .flip-face { padding: 1rem 0.95rem; }
+      .flip-face h4 { font-size: 0.92rem; }
+
+      .quiz {
+        padding: 1.15rem;
+        border-radius: 16px;
+      }
+      .q { font-size: 1.02rem; }
+      .opt {
+        font-size: 0.9rem;
+        padding: 0.95rem 1rem;
+        min-height: 48px;
+      }
+      .quiz-foot {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.75rem;
+      }
+      .quiz-foot .btn { width: 100%; justify-content: center; }
+      .quiz-end-actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .quiz-end-actions .btn {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .tabs {
+        gap: 0.35rem;
+        margin-bottom: 0.95rem;
+      }
+      .tab {
+        padding: 0.55rem 0.9rem;
+        font-size: 0.82rem;
+        min-height: 40px;
+      }
+      .panel { padding: 1.15rem; }
+      .panel li {
+        font-size: 0.88rem;
+        padding: 0.75rem 0.8rem;
+      }
+
+      .check { padding: 1.05rem 1.1rem; }
+      .check-row {
+        font-size: 0.92rem;
+        padding: 0.85rem 0;
+        min-height: 44px;
+      }
+      .check-row input { width: 20px; height: 20px; }
+
+      .res {
+        grid-template-columns: 1fr;
+        gap: 0.7rem;
+      }
+      .res-card { padding: 1.2rem 1.05rem; }
+
+      .pledge { padding: 1.4rem 1.15rem; }
+      .pledge label { font-size: 0.88rem; }
+      .fab {
+        bottom: 1.1rem;
+        right: 0.9rem;
+        padding: 0.65rem 0.9rem;
+        font-size: 0.82rem;
+        min-height: 42px;
+      }
+      .to-top {
+        bottom: 1.1rem;
+        left: 0.9rem;
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+      }
+      .a11y-toggle {
+        font-size: 0.72rem;
+        padding: 0.38rem 0.65rem;
+      }
+      .a11y-toggle .label-text { display: none; }
+      .a11y-panel {
+        right: 0;
+        min-width: 190px;
+      }
+      .nav-right { gap: 0.4rem; }
+
+      footer {
+        padding: 2rem 1rem 4.5rem;
+        font-size: 0.78rem;
+      }
+      .footer-links { gap: 1rem; }
+
+      body.lg { font-size: 19px; }
+      body.lg .hero h1 { font-size: clamp(2rem, 8vw, 2.6rem); }
+      body.lg .opt { font-size: 1.05rem; }
+      body.lg footer { padding-bottom: 5rem; }
+    }
+
+    @media (max-width: 380px) {
+      .nav-help { display: none; }
+    }
+
+    /* Footer */
+    footer {
+      position: relative; z-index: 2;
+      border-top: 1px solid var(--glass-border);
+      padding: 2.5rem 1.5rem 3.5rem;
+      text-align: center; color: var(--muted); font-size: 0.8rem;
+    }
+    footer::before {
+      content: '';
+      position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: min(280px, 60%); height: 1px;
+      background: linear-gradient(90deg, transparent, #818cf8, #e879f9, transparent);
+    }
+    footer a { color: #c4b5fd; text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+    .footer-links {
+      display: flex; gap: 1.4rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="mesh">
+    <div class="blob blob-1" id="b1"></div>
+    <div class="blob blob-2" id="b2"></div>
+    <div class="blob blob-3" id="b3"></div>
+    <div class="blob blob-4" id="b4"></div>
+  </div>
+  <div class="noise"></div>
+  <div class="scroll-bar" id="scrollBar"></div>
+
+  <a href="#quiz" class="skip-link">Aller au quiz</a>
+  <header>
+    <nav class="nav">
+      <a href="#" class="logo"><span class="logo-dot"></span> Agir ensemble</a>
+      <div class="nav-right">
+        <div class="a11y-wrap" id="a11yWrap">
+          <button type="button" class="a11y-toggle" id="a11yToggle" aria-expanded="false" title="Options de lisibilité">
+            <span class="aa">Aa</span><span class="label-text"> Affichage</span>
+          </button>
+          <div class="a11y-panel" role="group" aria-label="Options de lisibilité">
+            <button type="button" class="a11y-btn on" data-mode="default" onclick="setDisplay('default', this)" title="Affichage par défaut">Standard</button>
+            <button type="button" class="a11y-btn" data-mode="hc" onclick="setDisplay('hc', this)" title="Meilleure distinction du texte et des boutons">Contraste élevé</button>
+            <button type="button" class="a11y-btn" data-mode="lg" onclick="setDisplay('lg', this)" title="Texte nettement plus grand">Texte agrandi</button>
+            <button type="button" class="a11y-btn" data-mode="rm" onclick="setDisplay('rm', this)" title="Réduit les mouvements et animations">Moins de mouvement</button>
+          </div>
+        </div>
+        <a href="#aide" class="nav-help">Besoin d’aide →</a>
+      </div>
+    </nav>
+  </header>
+
+  <div class="wrap">
+    <!-- Hero -->
+    <section class="hero">
+      <div class="tag reveal">Semaine LFM · 23-28 novembre 2026</div>
+      <h1 class="reveal d1">Prévenir le harcèlement,<br><span>protéger notre santé</span></h1>
+      <p class="reveal d2">Reconnaître. Réagir. Soutenir. Dans le cadre de « Promouvoir, prévenir, accompagner ».</p>
+      <div class="hero-btns reveal d3">
+        <a href="#quiz" class="btn btn-main">Lancer le quiz</a>
+        <a href="#agir" class="btn btn-ghost">Que faire ?</a>
+      </div>
+    </section>
+
+    <!-- Essentiel -->
+    <section data-section="essentiel">
+      <div class="sticky-head">
+        <h2 class="title reveal">L’essentiel</h2>
+        <p class="sub reveal">Trois choses à savoir</p>
+      </div>
+      <div class="cards">
+        <div class="card glass reveal d1">
+          <div class="card-ico">💢</div>
+          <h3>Harcèlement</h3>
+          <p>Actes répétés et intentionnels : insultes, exclusion, rumeurs, coups… qui isolent et blessent.</p>
+        </div>
+        <div class="card glass reveal d2">
+          <div class="card-ico">📱</div>
+          <h3>Cyberharcèlement</h3>
+          <p>La même chose en ligne. Messages, photos, rumeurs. Ça compte autant que dans la cour.</p>
+        </div>
+        <div class="card glass reveal d3">
+          <div class="card-ico">🧠</div>
+          <h3>Santé</h3>
+          <p>Anxiété, sommeil, confiance, isolement. Le harcèlement touche directement la santé mentale.</p>
+        </div>
+      </div>
+      <div class="callout glass reveal">
+        <div class="callout-num">3018</div>
+        <p>Numéro unique gratuit · anonyme · 7j/7 de 9h à 23h</p>
+      </div>
+    </section>
+
+    <!-- Mythes flip -->
+    <section data-section="mythes">
+      <div class="sticky-head">
+        <h2 class="title reveal">Mythes en 10 secondes</h2>
+        <p class="sub reveal">Clique sur une carte pour la retourner</p>
+      </div>
+      <div class="myths">
+        <div class="flip reveal d1" onclick="this.classList.toggle('flipped')">
+          <div class="flip-inner">
+            <div class="flip-face">
+              <span class="flip-label myth">Mythe</span>
+              <h4>« C’est juste de la rigolade »</h4>
+              <span class="flip-hint">Clique pour retourner</span>
+            </div>
+            <div class="flip-face flip-back">
+              <span class="flip-label real">Réalité</span>
+              <h4>La répétition et l’intention de nuire transforment une blague en harcèlement.</h4>
+              <p>Ce qui est drôle pour l’un peut détruire l’autre.</p>
+            </div>
+          </div>
+        </div>
+        <div class="flip reveal d2" onclick="this.classList.toggle('flipped')">
+          <div class="flip-inner">
+            <div class="flip-face">
+              <span class="flip-label myth">Mythe</span>
+              <h4>« Il suffit d’ignorer »</h4>
+              <span class="flip-hint">Clique pour retourner</span>
+            </div>
+            <div class="flip-face flip-back">
+              <span class="flip-label real">Réalité</span>
+              <h4>Ignorer ne fait pas toujours cesser le harcèlement.</h4>
+              <p>L’absence de réaction peut encourager à continuer.</p>
+            </div>
+          </div>
+        </div>
+        <div class="flip reveal d3" onclick="this.classList.toggle('flipped')">
+          <div class="flip-inner">
+            <div class="flip-face">
+              <span class="flip-label myth">Mythe</span>
+              <h4>« Le cyberharcèlement n’est pas réel »</h4>
+              <span class="flip-hint">Clique pour retourner</span>
+            </div>
+            <div class="flip-face flip-back">
+              <span class="flip-label real">Réalité</span>
+              <h4>Les effets sont très concrets : anxiété, isolement, sommeil.</h4>
+              <p>Les mots sur un écran blessent autant.</p>
+            </div>
+          </div>
+        </div>
+        <div class="flip reveal d4" onclick="this.classList.toggle('flipped')">
+          <div class="flip-inner">
+            <div class="flip-face">
+              <span class="flip-label myth">Mythe</span>
+              <h4>« Si je parle, ça va empirer »</h4>
+              <span class="flip-hint">Clique pour retourner</span>
+            </div>
+            <div class="flip-face flip-back">
+              <span class="flip-label real">Réalité</span>
+              <h4>Dans la majorité des cas, parler permet d’agir rapidement.</h4>
+              <p>Le silence protège surtout les harceleurs.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quiz -->
+    <section id="quiz" data-section="quiz">
+      <div class="sticky-head">
+        <h2 class="title reveal">Quiz</h2>
+        <p class="sub reveal">7 situations · tes réflexes comptent</p>
+      </div>
+      <div class="quiz glass reveal">
+        <div class="bar"><i id="prog"></i></div>
+        <div id="quizArea"></div>
+        <div class="quiz-foot">
+          <span class="score" id="scoreTxt">Score : 0 / 7</span>
+          <button class="btn btn-main" id="nextBtn" style="display:none" onclick="goNext()">Suivant →</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Agir -->
+    <section id="agir" data-section="agir">
+      <div class="sticky-head">
+        <h2 class="title reveal">Que faire ?</h2>
+        <p class="sub reveal">Selon ta place</p>
+      </div>
+      <div class="tabs reveal">
+        <button class="tab on" data-p="v" onclick="setTab(this)">Victime</button>
+        <button class="tab" data-p="t" onclick="setTab(this)">Témoin</button>
+        <button class="tab" data-p="a" onclick="setTab(this)">Auteur</button>
+      </div>
+      <div id="panel-v" class="panel glass on reveal">
+        <h3>Tu es victime</h3>
+        <p>Tu n’es pas responsable. Tu as le droit d’être protégé·e.</p>
+        <ul>
+          <li>Parle à un adulte de confiance (CPE, prof, parent, infirmière…)</li>
+          <li>Garde les preuves : captures, messages, dates</li>
+          <li>Contacte le <strong>3018</strong> (gratuit, anonyme)</li>
+          <li>Ne réponds pas seul·e aux provocations</li>
+        </ul>
+      </div>
+      <div id="panel-t" class="panel glass">
+        <h3>Tu es témoin</h3>
+        <p>Ton silence peut être vécu comme un soutien aux harceleurs.</p>
+        <ul>
+          <li>Soutiens discrètement (message, présence)</li>
+          <li>Ne rejoins jamais les moqueries ou les partages</li>
+          <li>Signale à un adulte ou au 3018</li>
+          <li>En ligne : signale le contenu + 3018</li>
+        </ul>
+      </div>
+      <div id="panel-a" class="panel glass">
+        <h3>Tu as harcelé</h3>
+        <p>S’arrêter est un acte de courage.</p>
+        <ul>
+          <li>Arrête immédiatement</li>
+          <li>Soutiens la personne plutôt que de te justifier</li>
+          <li>Parle à un adulte si tu as besoin d’aide</li>
+          <li>Changer est possible</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Checklist -->
+    <section data-section="check">
+      <div class="sticky-head">
+        <h2 class="title reveal">Checklist</h2>
+        <p class="sub reveal">Coche ce que tu appliques déjà</p>
+      </div>
+      <div class="check glass reveal">
+        <label class="check-row"><input type="checkbox" onchange="updChecks()" /> Je connais le 3018</label>
+        <label class="check-row"><input type="checkbox" onchange="updChecks()" /> Je sais à qui parler dans mon établissement</label>
+        <label class="check-row"><input type="checkbox" onchange="updChecks()" /> Je ne like / partage jamais de contenus humiliants</label>
+        <label class="check-row"><input type="checkbox" onchange="updChecks()" /> Si je vois une situation, j’agis</label>
+        <label class="check-row"><input type="checkbox" onchange="updChecks()" /> Mes comptes sont en mode privé</label>
+        <div class="check-n" id="checkN">0 / 5</div>
+        <div class="check-done-msg" id="checkDone">Checklist complète. Tu as les bons réflexes.</div>
+      </div>
+    </section>
+
+    <!-- Aide -->
+    <section id="aide" data-section="aide">
+      <div class="sticky-head">
+        <h2 class="title reveal">Aide immédiate</h2>
+        <p class="sub reveal">Tu n’es jamais seul·e</p>
+      </div>
+      <div class="res">
+        <div class="res-card glass reveal d1">
+          <div class="n">3018</div>
+          <h3>Numéro unique</h3>
+          <p>Harcèlement & cyber. Gratuit, anonyme. 9h-23h.</p>
+          <a href="https://www.3018.fr" target="_blank" rel="noopener">3018.fr →</a>
+        </div>
+        <div class="res-card glass reveal d2">
+          <div class="n">119</div>
+          <h3>Enfance en danger</h3>
+          <p>Si tu es en danger. Gratuit, 24h/24.</p>
+          <a href="https://www.allo119.gouv.fr" target="_blank" rel="noopener">allo119.gouv.fr →</a>
+        </div>
+        <div class="res-card glass reveal d1">
+          <div class="n">pHARe</div>
+          <h3>Programme anti-harcèlement</h3>
+          <p>Dispositif officiel de ton établissement : équipe ressource, protocoles, prévention.</p>
+          <a href="https://www.education.gouv.fr/non-au-harcelement" target="_blank" rel="noopener">En savoir plus →</a>
+        </div>
+        <div class="res-card glass reveal d2">
+          <div class="n">App</div>
+          <h3>Application 3018</h3>
+          <p>Tchat discret et signalement rapide.</p>
+          <a href="https://www.3018.fr" target="_blank" rel="noopener">Télécharger →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Engagement + Share -->
+    <section data-section="engage">
+      <div class="sticky-head">
+        <h2 class="title reveal">Engagement</h2>
+        <p class="sub reveal">Un geste simple</p>
+      </div>
+      <div class="pledge glass reveal">
+        <h3>Je m’engage</h3>
+        <p>À ne jamais participer au harcèlement, à soutenir les victimes et à utiliser les réseaux de façon responsable.</p>
+        <label>
+          <input type="checkbox" id="pledgeCheck" onchange="togglePledge()" />
+          <span>Je m’engage à respecter les autres, en présentiel comme en ligne.</span>
+        </label>
+        <button class="btn btn-main" id="pledgeBtn" onclick="doPledge()" disabled style="opacity:0.4;cursor:not-allowed">Valider</button>
+        <div class="pledge-ok" id="pledgeOk">Merci. Ton engagement compte.</div>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    <div class="footer-links">
+      <a href="https://www.aefe.gouv.fr" target="_blank" rel="noopener">AEFE</a>
+      <a href="https://www.3018.fr" target="_blank" rel="noopener">3018</a>
+      <a href="https://www.education.gouv.fr/non-au-harcelement" target="_blank" rel="noopener">Non au harcèlement</a>
+    </div>
+    <p>
+      10ᵉ Semaine des lycées français du monde · 23-28 nov. 2026<br>
+      « Promouvoir, prévenir, accompagner : agissons ensemble pour notre santé ! »
+    </p>
+    <p style="margin-top:0.75rem;opacity:0.75;font-size:0.75rem">
+      Outil pédagogique de sensibilisation. En cas de détresse → 3018 ou un adulte de confiance.
+    </p>
+  </footer>
+
+  <!-- Floating 3018 -->
+  <a href="https://www.3018.fr" target="_blank" rel="noopener" class="fab" title="Appeler ou tchatter le 3018">
+    3018 <span>· aide</span>
+  </a>
+  <button class="to-top" id="toTop" aria-label="Remonter en haut" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+  <!-- Options d'affichage (inclusives, non médicales) -->
+
+  <script>
+    // Scroll progress + parallax
+    const scrollBar = document.getElementById('scrollBar');
+    const b1 = document.getElementById('b1');
+    const b2 = document.getElementById('b2');
+    const b3 = document.getElementById('b3');
+    const b4 = document.getElementById('b4');
+
+    const toTop = document.getElementById('toTop');
+    window.addEventListener('scroll', () => {
+      const h = document.documentElement.scrollHeight - window.innerHeight;
+      const p = h > 0 ? window.scrollY / h : 0;
+      scrollBar.style.width = (p * 100) + '%';
+
+      // Light parallax
+      const y = window.scrollY;
+      b1.style.transform = `translate(${y * 0.02}px, ${y * 0.04}px) scale(1)`;
+      b2.style.transform = `translate(${-y * 0.03}px, ${y * 0.025}px)`;
+      b3.style.transform = `translate(${y * 0.015}px, ${-y * 0.03}px)`;
+      b4.style.transform = `translate(${-y * 0.02}px, ${-y * 0.015}px)`;
+
+      // Back to top
+      if (window.scrollY > 500) toTop.classList.add('show');
+      else toTop.classList.remove('show');
+    }, { passive: true });
+
+    // Reveal
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('on');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -25px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+    document.querySelectorAll('.hero .reveal').forEach(el => el.classList.add('on'));
+
+    // Quiz
+    const questions = [
+      {
+        q: "Des messages insultants arrivent chaque jour dans le groupe de classe. Que faire ?",
+        options: [
+          { text: "Répondre pour défendre la personne", correct: false, tip: "Répondre peut alimenter le conflit." },
+          { text: "Soutenir en privé + signaler à un adulte ou au 3018", correct: true, tip: "Oui. Soutien discret + alerte." },
+          { text: "Ignorer : ce n’est que des messages", correct: false, tip: "Le cyberharcèlement a des effets réels." },
+          { text: "Partager pour montrer que c’est grave", correct: false, tip: "Ça diffuse encore plus l’humiliation." }
+        ]
+      },
+      {
+        q: "Tu vois quelqu’un isolé et moqué. Tu n’es pas ami avec lui. Tu peux :",
+        options: [
+          { text: "Ne rien faire", correct: false, tip: "Les témoins ont un vrai pouvoir." },
+          { text: "Le rejoindre un peu + en parler à un adulte si ça continue", correct: true, tip: "Exact. Présence + signalement." },
+          { text: "Filmer et poster pour dénoncer", correct: false, tip: "Peut devenir du cyberharcèlement." },
+          { text: "Rire avec les autres pour ne pas être la cible", correct: false, tip: "Ça renforce le harcèlement." }
+        ]
+      },
+      {
+        q: "Quel est le numéro unique gratuit contre le harcèlement et le cyberharcèlement ?",
+        options: [
+          { text: "15", correct: false, tip: "C’est le SAMU." },
+          { text: "3018", correct: true, tip: "Parfait. Gratuit, anonyme, 9h-23h." },
+          { text: "112", correct: false, tip: "Urgences européennes." },
+          { text: "0800 200 000", correct: false, tip: "Ce n’est pas le bon numéro." }
+        ]
+      },
+      {
+        q: "Une rumeur humiliante circule sur toi en ligne. Tu :",
+        options: [
+          { text: "Supprimes ton compte tout de suite", correct: false, tip: "Pas forcément nécessaire." },
+          { text: "Gardes des preuves, signales, contactes 3018 + un adulte", correct: true, tip: "Oui. Preuves + 3018 + adulte." },
+          { text: "Réponds publiquement pour te justifier", correct: false, tip: "Ça peut attiser la rumeur." },
+          { text: "Attends que ça passe", correct: false, tip: "Agir tôt est important." }
+        ]
+      },
+      {
+        q: "Tu as participé à des moqueries et tu regrettes. Tu :",
+        options: [
+          { text: "Ne dis rien pour ne pas te faire remarquer", correct: false, tip: "S’arrêter est déjà un pas." },
+          { text: "Arrêtes, soutiens la personne, parles à un adulte si besoin", correct: true, tip: "Oui. Arrêter + soutenir." },
+          { text: "Continues pour ne pas perdre la face", correct: false, tip: "Ça empire tout." },
+          { text: "Dis que tout le monde le faisait", correct: false, tip: "Ça n’excuse pas." }
+        ]
+      },
+      {
+        q: "Un groupe diffuse une photo de toi sans ton accord avec des commentaires moqueurs. C’est :",
+        options: [
+          { text: "Juste une blague de mauvais goût", correct: false, tip: "Non. Cela peut constituer du cyberharcèlement." },
+          { text: "Du cyberharcèlement (potentiellement sanctionnable)", correct: true, tip: "Oui. Garde les preuves et signale." },
+          { text: "Normal sur les réseaux", correct: false, tip: "Ce n’est pas normal." },
+          { text: "Impossible à faire retirer", correct: false, tip: "Le 3018 peut obtenir le retrait rapide." }
+        ]
+      },
+      {
+        q: "En tant que témoin, le plus utile est souvent de :",
+        options: [
+          { text: "Filmer et poster pour dénoncer", correct: false, tip: "Filmer et poster peut aggraver la situation." },
+          { text: "Soutenir discrètement + signaler à un adulte ou au 3018", correct: true, tip: "Oui. Soutien + signalement." },
+          { text: "Confronter les harceleurs seul·e devant tout le monde", correct: false, tip: "Peut être risqué. Passe par des adultes." },
+          { text: "Ne rien faire pour rester neutre", correct: false, tip: "Le silence est souvent vécu comme un soutien aux harceleurs." }
+        ]
+      }
+    ];
+
+    let idx = 0, score = 0, locked = false;
+
+    function render() {
+      locked = false;
+      document.getElementById('nextBtn').style.display = 'none';
+      const q = questions[idx];
+      let html = `<div class="q">${idx + 1}. ${q.q}</div><div class="opts">`;
+      q.options.forEach((opt, i) => {
+        html += `<button class="opt" id="opt${i}" onclick="choose(${i})">${opt.text}</button>`;
+      });
+      html += `</div><div class="fb" id="fb"></div>`;
+      document.getElementById('quizArea').innerHTML = html;
+      document.getElementById('prog').style.width = (idx / questions.length * 100) + '%';
+      document.getElementById('scoreTxt').textContent = `Score : ${score} / ${questions.length}`;
+    }
+
+    function choose(i) {
+      if (locked) return;
+      locked = true;
+      const q = questions[idx];
+      const opt = q.options[i];
+      const fb = document.getElementById('fb');
+      q.options.forEach((_, j) => {
+        const btn = document.getElementById('opt' + j);
+        btn.disabled = true;
+        if (q.options[j].correct) btn.classList.add('ok');
+      });
+      if (opt.correct) {
+        score++;
+        document.getElementById('opt' + i).classList.add('ok');
+        fb.className = 'fb show good';
+        fb.textContent = '✓ ' + opt.tip;
+      } else {
+        document.getElementById('opt' + i).classList.add('ko');
+        fb.className = 'fb show bad';
+        fb.textContent = '✗ ' + opt.tip;
+      }
+      document.getElementById('scoreTxt').textContent = `Score : ${score} / ${questions.length}`;
+      document.getElementById('nextBtn').style.display = 'inline-flex';
+      document.getElementById('prog').style.width = ((idx + 1) / questions.length * 100) + '%';
+    }
+
+    function goNext() {
+      idx++;
+      if (idx < questions.length) {
+        render();
+      } else {
+        const msg = score >= 5
+          ? 'Très bons réflexes. Tu sais déjà comment agir.'
+          : score >= 3
+          ? 'Bien. Voici les points essentiels à retenir.'
+          : 'L’important, c’est d’avoir appris les bons réflexes.';
+        document.getElementById('quizArea').innerHTML = `
+          <div class="quiz-end">
+            <div class="quiz-end-icon">✓</div>
+            <h3>Quiz terminé</h3>
+            <div class="score-big">${score} / ${questions.length}</div>
+            <p>${msg}</p>
+            <ul>
+              <li>Soutenir en privé + signaler à un adulte</li>
+              <li>Garder des preuves (captures, dates)</li>
+              <li>Contacter le 3018 si besoin</li>
+              <li>Ne pas diffuser ni alimenter le conflit</li>
+            </ul>
+            <div class="quiz-end-actions">
+              <a href="https://www.3018.fr" target="_blank" rel="noopener" class="btn btn-main">Aller sur 3018.fr</a>
+              <button class="btn btn-ghost" onclick="restartQuiz()">Recommencer</button>
+            </div>
+          </div>`;
+        document.getElementById('nextBtn').style.display = 'none';
+      }
+    }
+
+    function restartQuiz() {
+      idx = 0; score = 0;
+      render();
+    }
+
+    function setTab(btn) {
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('on'));
+      document.querySelectorAll('.panel').forEach(p => p.classList.remove('on'));
+      btn.classList.add('on');
+      document.getElementById('panel-' + btn.dataset.p).classList.add('on');
+    }
+
+    function updChecks() {
+      const rows = document.querySelectorAll('.check-row');
+      const box = document.querySelector('.check');
+      const doneMsg = document.getElementById('checkDone');
+      let n = 0;
+      rows.forEach(r => {
+        const c = r.querySelector('input');
+        if (c.checked) { n++; r.classList.add('done'); }
+        else r.classList.remove('done');
+      });
+      document.getElementById('checkN').textContent = n + ' / ' + rows.length;
+      if (n === rows.length) {
+        box.classList.add('complete');
+        doneMsg.classList.add('show');
+      } else {
+        box.classList.remove('complete');
+        doneMsg.classList.remove('show');
+      }
+    }
+
+    function togglePledge() {
+      const on = document.getElementById('pledgeCheck').checked;
+      const b = document.getElementById('pledgeBtn');
+      b.disabled = !on;
+      b.style.opacity = on ? '1' : '0.4';
+      b.style.cursor = on ? 'pointer' : 'not-allowed';
+    }
+    function doPledge() {
+      if (!document.getElementById('pledgeCheck').checked) return;
+      document.getElementById('pledgeOk').classList.add('show');
+      document.getElementById('pledgeBtn').style.display = 'none';
+      document.getElementById('pledgeCheck').disabled = true;
+    }
+
+    // Affichage accessible (labels neutres)
+    const a11yWrap = document.getElementById('a11yWrap');
+    const a11yToggle = document.getElementById('a11yToggle');
+    a11yToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const open = a11yWrap.classList.toggle('open');
+      a11yToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    document.addEventListener('click', (e) => {
+      if (!a11yWrap.contains(e.target)) {
+        a11yWrap.classList.remove('open');
+        a11yToggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    function setDisplay(mode, btn) {
+      document.body.classList.remove('hc', 'lg', 'rm');
+      document.querySelectorAll('.a11y-btn').forEach(b => b.classList.remove('on'));
+      if (mode === 'hc') document.body.classList.add('hc');
+      if (mode === 'lg') document.body.classList.add('lg');
+      if (mode === 'rm') document.body.classList.add('rm');
+      if (btn) btn.classList.add('on');
+      else document.querySelector('.a11y-btn[data-mode="'+mode+'"]')?.classList.add('on');
+      try { localStorage.setItem('lfm-display', mode); } catch (e) {}
+    }
+    try {
+      const saved = localStorage.getItem('lfm-display');
+      if (saved && saved !== 'default') {
+        const b = document.querySelector('.a11y-btn[data-mode="'+saved+'"]');
+        setDisplay(saved, b);
+      }
+    } catch (e) {}
+
+    render();
+  </script>
+</body>
+</html>
