@@ -933,7 +933,479 @@
     .footer-links {
       display: flex; gap: 1.4rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1rem;
     }
+
+    /* ===== LIVE STATS (compact) ===== */
+    .live-stats {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem 1.1rem;
+      margin: 0.6rem 0 0.2rem;
+      padding: 0.55rem 0.9rem;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--glass-border);
+      max-width: fit-content;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .stat-card {
+      display: flex;
+      align-items: baseline;
+      gap: 0.35rem;
+      padding: 0;
+      background: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+      transform: none !important;
+    }
+    .stat-card:hover { transform: none; box-shadow: none; }
+    .stat-num {
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      background: linear-gradient(120deg, #818cf8, #e879f9);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+      min-height: auto;
+    }
+    .stat-label {
+      font-size: 0.72rem;
+      color: var(--muted);
+      margin-top: 0;
+      line-height: 1;
+    }
+    .stat-live { display: none; }
+    body.hc .stat-num {
+      background: none;
+      -webkit-text-fill-color: #ffff00;
+      color: #ffff00;
+    }
+    body.lg .stat-num { font-size: 1.1rem; }
+    body.lg .stat-label { font-size: 0.85rem; }
+    body.lg .live-stats { padding: 0.65rem 1.1rem; gap: 0.6rem 1.3rem; }
+
+    /* Admin secret panel */
+    .admin-fab {
+      position: fixed;
+      bottom: 5.2rem;
+      right: 1.5rem;
+      z-index: 61;
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      border: 1px solid var(--glass-border);
+      background: rgba(7,7,12,0.8);
+      backdrop-filter: blur(12px);
+      color: var(--muted);
+      font-size: 0.9rem;
+      cursor: pointer;
+      display: none;
+      place-items: center;
+      opacity: 0.55;
+      transition: border-color 0.2s, color 0.2s, box-shadow 0.2s, opacity 0.2s;
+    }
+    .admin-fab.show { display: grid; }
+    .admin-fab:hover { opacity: 1; }
+    .admin-fab:hover {
+      border-color: rgba(167,139,250,0.5);
+      color: #c4b5fd;
+      box-shadow: 0 0 20px rgba(129,140,248,0.25);
+    }
+    .admin-panel {
+      display: none;
+      position: fixed;
+      bottom: 7.2rem;
+      right: 1.5rem;
+      z-index: 62;
+      width: min(320px, calc(100vw - 2rem));
+      max-height: min(70vh, 480px);
+      overflow-y: auto;
+      padding: 1.15rem;
+      border-radius: 16px;
+      background: rgba(12,14,20,0.96);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(20px);
+      box-shadow: 0 20px 50px -12px rgba(0,0,0,0.7);
+      animation: a11yIn 0.2s ease;
+    }
+    .admin-panel.open { display: block; }
+    .admin-panel h4 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .admin-panel .close-admin {
+      border: none;
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      font-size: 1.1rem;
+      line-height: 1;
+      padding: 0.2rem;
+    }
+    .admin-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.45rem 0;
+      border-bottom: 1px solid var(--glass-border);
+      font-size: 0.82rem;
+    }
+    .admin-row:last-child { border-bottom: none; }
+    .admin-row span:last-child {
+      font-weight: 700;
+      color: #c4b5fd;
+      font-variant-numeric: tabular-nums;
+    }
+    .admin-note {
+      margin-top: 0.7rem;
+      font-size: 0.72rem;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+    body.hc .stat-num {
+      background: none;
+      -webkit-text-fill-color: #ffff00;
+      color: #ffff00;
+    }
+    body.lg .stat-num { font-size: 2rem; }
+    body.lg .stat-label { font-size: 0.95rem; }
+
+
+    /* Lang toggle */
+    .lang-toggle {
+      display: inline-flex;
+      border: 1px solid var(--glass-border);
+      border-radius: 999px;
+      overflow: hidden;
+      background: rgba(255,255,255,0.04);
+    }
+    .lang-btn {
+      border: none;
+      background: transparent;
+      color: var(--muted);
+      font-family: inherit;
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 0.3rem 0.38rem;
+      cursor: pointer;
+      transition: 0.2s;
+      white-space: nowrap;
+    }
+    .lang-btn.on {
+      background: rgba(167,139,250,0.2);
+      color: #c4b5fd;
+    }
+    .lang-btn:hover { color: var(--text); }
+    @media (max-width: 700px) {
+      .lang-toggle { flex-wrap: wrap; max-width: 200px; justify-content: flex-end; }
+      .lang-btn { font-size: 0.62rem; padding: 0.28rem 0.32rem; }
+    }
+
+    /* Emergency FAB */
+    .sos-fab {
+      position: fixed;
+      bottom: 5.2rem;
+      left: 1.5rem;
+      z-index: 61;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.65rem 1rem;
+      border-radius: 999px;
+      border: 1px solid rgba(248,113,113,0.35);
+      background: rgba(127,29,29,0.55);
+      backdrop-filter: blur(12px);
+      color: #fecaca;
+      font-weight: 700;
+      font-size: 0.82rem;
+      font-family: inherit;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .sos-fab:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 24px rgba(248,113,113,0.3);
+    }
+    @media (max-width: 640px) {
+      .sos-fab { bottom: 4.6rem; left: 0.9rem; padding: 0.55rem 0.8rem; font-size: 0.75rem; }
+    }
+
+    /* Emergency overlay */
+    .sos-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      background: #0a0a0c;
+      color: #fff;
+      padding: 1.5rem;
+      overflow-y: auto;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      gap: 1rem;
+    }
+    .sos-overlay.open { display: flex; }
+    .sos-overlay h2 {
+      font-size: clamp(1.4rem, 4vw, 1.9rem);
+      font-weight: 700;
+      max-width: 420px;
+      line-height: 1.25;
+    }
+    .sos-overlay p {
+      color: #b0b0c0;
+      max-width: 380px;
+      font-size: 1.05rem;
+      line-height: 1.5;
+    }
+    .sos-big {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.35rem;
+      margin: 0.5rem 0 1rem;
+      padding: 1.4rem 2.2rem;
+      border-radius: 20px;
+      background: linear-gradient(135deg, #6366f1, #a855f7);
+      color: #fff;
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 2.4rem;
+      letter-spacing: -0.02em;
+      box-shadow: 0 12px 40px -8px rgba(99,102,241,0.55);
+      transition: transform 0.2s;
+    }
+    .sos-big:hover { transform: scale(1.03); }
+    .sos-big small {
+      font-size: 0.85rem;
+      font-weight: 600;
+      opacity: 0.9;
+    }
+    .sos-list {
+      list-style: none;
+      text-align: left;
+      max-width: 360px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+      margin: 0.5rem 0 1.2rem;
+    }
+    .sos-list li {
+      padding: 0.75rem 1rem;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      font-size: 0.95rem;
+    }
+    .sos-close {
+      margin-top: 0.5rem;
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.2);
+      color: #c4b5fd;
+      padding: 0.7rem 1.3rem;
+      border-radius: 999px;
+      font-family: inherit;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    body.hc .sos-big { background: #ffff00; color: #000; }
+    body.hc .sos-overlay { background: #000; }
+
+    /* Exit reminder toast */
+    .exit-toast {
+      display: none;
+      position: fixed;
+      bottom: 5.5rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(12px);
+      z-index: 90;
+      max-width: min(420px, calc(100vw - 2rem));
+      padding: 0.9rem 1.1rem;
+      border-radius: 14px;
+      background: rgba(12,14,20,0.96);
+      border: 1px solid rgba(167,139,250,0.35);
+      box-shadow: 0 16px 40px -10px rgba(0,0,0,0.6);
+      color: var(--text);
+      font-size: 0.88rem;
+      line-height: 1.4;
+      opacity: 0;
+      transition: opacity 0.25s, transform 0.25s;
+    }
+    .exit-toast.show {
+      display: block;
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+    .exit-toast strong { color: #c4b5fd; }
+    .exit-toast .exit-actions {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 0.65rem;
+      flex-wrap: wrap;
+    }
+    .exit-toast button, .exit-toast a {
+      font-family: inherit;
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 0.4rem 0.85rem;
+      border-radius: 999px;
+      cursor: pointer;
+      text-decoration: none;
+      border: none;
+    }
+    .exit-toast .btn-go {
+      background: linear-gradient(135deg, #6366f1, #a855f7);
+      color: #fff;
+    }
+    .exit-toast .btn-dismiss {
+      background: rgba(255,255,255,0.06);
+      color: var(--muted);
+      border: 1px solid var(--glass-border);
+    }
+
+
+    /* Admin fullscreen dashboard */
+    .admin-fab { /* keep existing */ }
+    .admin-panel {
+      display: none !important; /* replaced by dashboard */
+    }
+    .admin-dash {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 300;
+      background: #07070c;
+      color: var(--text);
+      overflow-y: auto;
+      padding: 1.25rem 1.5rem 2.5rem;
+    }
+    .admin-dash.open { display: block; }
+    .admin-dash-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.25rem;
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      background: rgba(7,7,12,0.92);
+      backdrop-filter: blur(12px);
+      padding: 0.75rem 0;
+      border-bottom: 1px solid var(--glass-border);
+    }
+    .admin-dash-head h2 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+    .admin-dash-actions {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .admin-dash-actions button {
+      font-family: inherit;
+      font-size: 0.82rem;
+      font-weight: 600;
+      padding: 0.5rem 0.95rem;
+      border-radius: 999px;
+      cursor: pointer;
+      border: 1px solid var(--glass-border);
+      background: rgba(255,255,255,0.05);
+      color: var(--text);
+      transition: 0.2s;
+    }
+    .admin-dash-actions button:hover {
+      border-color: rgba(167,139,250,0.45);
+      background: rgba(167,139,250,0.12);
+    }
+    .admin-dash-actions .btn-danger {
+      border-color: rgba(248,113,113,0.4);
+      color: #fca5a5;
+    }
+    .admin-dash-actions .btn-danger:hover {
+      background: rgba(248,113,113,0.12);
+    }
+    .admin-kpis {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 0.75rem;
+      margin-bottom: 1.25rem;
+    }
+    .admin-kpi {
+      padding: 1rem;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--glass-border);
+    }
+    .admin-kpi .k {
+      font-size: 0.72rem;
+      color: var(--muted);
+      margin-bottom: 0.35rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-weight: 600;
+    }
+    .admin-kpi .v {
+      font-size: 1.45rem;
+      font-weight: 700;
+      background: linear-gradient(120deg, #818cf8, #e879f9);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-variant-numeric: tabular-nums;
+    }
+    .admin-charts {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+    @media (max-width: 800px) {
+      .admin-charts { grid-template-columns: 1fr; }
+    }
+    .admin-chart-card {
+      padding: 1rem 1.1rem 1.2rem;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.035);
+      border: 1px solid var(--glass-border);
+      min-height: 280px;
+    }
+    .admin-chart-card h3 {
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      color: #c4b5fd;
+    }
+    .admin-chart-card canvas {
+      width: 100% !important;
+      max-height: 240px;
+    }
+    .admin-chart-wide {
+      grid-column: 1 / -1;
+      min-height: 300px;
+    }
+    .admin-chart-wide canvas { max-height: 260px; }
+    .admin-foot-note {
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-top: 0.5rem;
+      text-align: center;
+    }
+
   </style>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 </head>
 <body>
   <div class="mesh">
@@ -950,6 +1422,15 @@
     <nav class="nav">
       <a href="#" class="logo"><span class="logo-dot"></span> Agir ensemble</a>
       <div class="nav-right">
+        <div class="lang-toggle" role="group" aria-label="Language">
+          <button type="button" class="lang-btn on" data-lang="fr" id="langFr">FR</button>
+          <button type="button" class="lang-btn" data-lang="en" id="langEn">EN</button>
+          <button type="button" class="lang-btn" data-lang="es" id="langEs">ES</button>
+          <button type="button" class="lang-btn" data-lang="pt" id="langPt">PT</button>
+          <button type="button" class="lang-btn" data-lang="ar" id="langAr">عربي</button>
+          <button type="button" class="lang-btn" data-lang="zh" id="langZh">中文</button>
+          <button type="button" class="lang-btn" data-lang="th" id="langTh">ไทย</button>
+        </div>
         <div class="a11y-wrap" id="a11yWrap">
           <button type="button" class="a11y-toggle" id="a11yToggle" aria-expanded="false" title="Options de lisibilité">
             <span class="aa">Aa</span><span class="label-text"> Affichage</span>
@@ -961,7 +1442,7 @@
             <button type="button" class="a11y-btn" data-mode="rm" onclick="setDisplay('rm', this)" title="Réduit les mouvements et animations">Moins de mouvement</button>
           </div>
         </div>
-        <a href="#aide" class="nav-help">Besoin d’aide →</a>
+        <a href="#aide" class="nav-help" data-i18n="navHelp">Besoin d’aide →</a>
       </div>
     </nav>
   </header>
@@ -969,14 +1450,30 @@
   <div class="wrap">
     <!-- Hero -->
     <section class="hero">
-      <div class="tag reveal">Semaine LFM · 23-28 novembre 2026</div>
-      <h1 class="reveal d1">Prévenir le harcèlement,<br><span>protéger notre santé</span></h1>
-      <p class="reveal d2">Reconnaître. Réagir. Soutenir. Dans le cadre de « Promouvoir, prévenir, accompagner ».</p>
+      <div class="tag reveal" data-i18n="tag">Semaine LFM · 23-28 novembre 2026</div>
+      <h1 class="reveal d1" data-i18n-html="heroTitle">Prévenir le harcèlement,<br><span>protéger notre santé</span></h1>
+      <p class="reveal d2" data-i18n="heroSub">Reconnaître. Réagir. Soutenir. Dans le cadre de « Promouvoir, prévenir, accompagner ».</p>
       <div class="hero-btns reveal d3">
-        <a href="#quiz" class="btn btn-main">Lancer le quiz</a>
-        <a href="#agir" class="btn btn-ghost">Que faire ?</a>
+        <a href="#quiz" class="btn btn-main" data-i18n="btnQuiz">Lancer le quiz</a>
+        <a href="#agir" class="btn btn-ghost" data-i18n="btnAct">Que faire ?</a>
       </div>
     </section>
+
+    <!-- Live community stats (compact) -->
+    <div class="live-stats reveal" style="margin-bottom:1.2rem">
+      <div class="stat-card">
+        <div class="stat-num" id="statViewsToday">—</div>
+        <div class="stat-label" data-i18n="statViews">vues auj.</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" id="statPledges">—</div>
+        <div class="stat-label" data-i18n="statPledges">engagements</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" id="statQuiz">—</div>
+        <div class="stat-label" data-i18n="statQuiz">quiz terminés</div>
+      </div>
+    </div>
 
     <!-- Essentiel -->
     <section data-section="essentiel">
@@ -1225,6 +1722,73 @@
 
   <!-- Options d'affichage (inclusives, non médicales) -->
 
+  <!-- Secret creator panel -->
+
+  <!-- Emergency mode -->
+  <button type="button" class="sos-fab" id="sosFab" aria-label="Emergency help">🆘 <span data-i18n="sosBtn">Urgence</span></button>
+  <div class="sos-overlay" id="sosOverlay" role="dialog" aria-modal="true" aria-labelledby="sosTitle">
+    <h2 id="sosTitle" data-i18n="sosTitle">Tu as besoin d’aide maintenant</h2>
+    <p data-i18n="sosText">Tu n’es pas seul·e. Contacte le 3018 (gratuit, anonyme) ou un adulte de confiance.</p>
+    <a class="sos-big" href="https://www.3018.fr" target="_blank" rel="noopener">
+      3018
+      <small data-i18n="sosSmall">Appeler ou tchatter · 9h–23h</small>
+    </a>
+    <ul class="sos-list">
+      <li data-i18n="sosLi1">Parle à un adulte de confiance (CPE, prof, parent…)</li>
+      <li data-i18n="sosLi2">En danger immédiat → 119 (enfance en danger)</li>
+      <li data-i18n="sosLi3">Garde les preuves (captures, dates)</li>
+    </ul>
+    <button type="button" class="sos-close" id="sosClose" data-i18n="sosClose">Fermer</button>
+  </div>
+
+  <!-- Exit reminder -->
+  <div class="exit-toast" id="exitToast" role="status">
+    <div data-i18n="exitMsg">Avant de partir : le <strong>3018</strong> est gratuit et anonyme si tu as besoin d’aide.</div>
+    <div class="exit-actions">
+      <a href="#aide" class="btn-go" id="exitGo" data-i18n="exitGo">Voir l’aide</a>
+      <button type="button" class="btn-dismiss" id="exitDismiss" data-i18n="exitDismiss">OK</button>
+    </div>
+  </div>
+
+  <button type="button" class="admin-fab" id="adminFab" title="Stats créateur" aria-label="Stats créateur">📊</button>
+  <div class="admin-dash" id="adminDash" role="dialog" aria-modal="true" aria-label="Dashboard stats">
+    <div class="admin-dash-head">
+      <h2>Dashboard · Agir ensemble</h2>
+      <div class="admin-dash-actions">
+        <button type="button" id="adminRefresh">Rafraîchir</button>
+        <button type="button" class="btn-danger" id="adminReset">Réinitialiser</button>
+        <button type="button" id="adminClose">Fermer ✕</button>
+      </div>
+    </div>
+    <div class="admin-kpis">
+      <div class="admin-kpi"><div class="k">Vues totales</div><div class="v" id="admTotal">—</div></div>
+      <div class="admin-kpi"><div class="k">Vues aujourd’hui</div><div class="v" id="admToday">—</div></div>
+      <div class="admin-kpi"><div class="k">Engagements</div><div class="v" id="admPledges">—</div></div>
+      <div class="admin-kpi"><div class="k">Quiz démarrés</div><div class="v" id="admQuizStart">—</div></div>
+      <div class="admin-kpi"><div class="k">Quiz terminés</div><div class="v" id="admQuiz">—</div></div>
+      <div class="admin-kpi"><div class="k">Taux fin quiz</div><div class="v" id="admQuizRate">—</div></div>
+      <div class="admin-kpi"><div class="k">% jusqu’engagement</div><div class="v" id="admEngageRate">—</div></div>
+      <div class="admin-kpi"><div class="k">Temps moyen</div><div class="v" id="admAvgTime">—</div></div>
+      <div class="admin-kpi"><div class="k">Pic horaire</div><div class="v" id="admPeakHour">—</div></div>
+      <div class="admin-kpi"><div class="k">Section top</div><div class="v" id="admTopSection">—</div></div>
+    </div>
+    <div class="admin-charts">
+      <div class="admin-chart-card admin-chart-wide">
+        <h3>Vues par heure (UTC)</h3>
+        <canvas id="chartHours"></canvas>
+      </div>
+      <div class="admin-chart-card">
+        <h3>Sections atteintes</h3>
+        <canvas id="chartSections"></canvas>
+      </div>
+      <div class="admin-chart-card">
+        <h3>Entonnoir d’engagement</h3>
+        <canvas id="chartFunnel"></canvas>
+      </div>
+    </div>
+    <p class="admin-foot-note">Données anonymes · Ctrl+M · code requis · Réinitialiser remet tous les compteurs à 0</p>
+  </div>
+
   <script>
     // Scroll progress + parallax
     const scrollBar = document.getElementById('scrollBar');
@@ -1263,73 +1827,466 @@
     document.querySelectorAll('.reveal').forEach(el => io.observe(el));
     document.querySelectorAll('.hero .reveal').forEach(el => el.classList.add('on'));
 
-    // Quiz
-    const questions = [
-      {
-        q: "Des messages insultants arrivent chaque jour dans le groupe de classe. Que faire ?",
-        options: [
-          { text: "Répondre pour défendre la personne", correct: false, tip: "Répondre peut alimenter le conflit." },
-          { text: "Soutenir en privé + signaler à un adulte ou au 3018", correct: true, tip: "Oui. Soutien discret + alerte." },
-          { text: "Ignorer : ce n’est que des messages", correct: false, tip: "Le cyberharcèlement a des effets réels." },
-          { text: "Partager pour montrer que c’est grave", correct: false, tip: "Ça diffuse encore plus l’humiliation." }
-        ]
-      },
-      {
-        q: "Tu vois quelqu’un isolé et moqué. Tu n’es pas ami avec lui. Tu peux :",
-        options: [
-          { text: "Ne rien faire", correct: false, tip: "Les témoins ont un vrai pouvoir." },
-          { text: "Le rejoindre un peu + en parler à un adulte si ça continue", correct: true, tip: "Exact. Présence + signalement." },
-          { text: "Filmer et poster pour dénoncer", correct: false, tip: "Peut devenir du cyberharcèlement." },
-          { text: "Rire avec les autres pour ne pas être la cible", correct: false, tip: "Ça renforce le harcèlement." }
-        ]
-      },
-      {
-        q: "Quel est le numéro unique gratuit contre le harcèlement et le cyberharcèlement ?",
-        options: [
-          { text: "15", correct: false, tip: "C’est le SAMU." },
-          { text: "3018", correct: true, tip: "Parfait. Gratuit, anonyme, 9h-23h." },
-          { text: "112", correct: false, tip: "Urgences européennes." },
-          { text: "0800 200 000", correct: false, tip: "Ce n’est pas le bon numéro." }
-        ]
-      },
-      {
-        q: "Une rumeur humiliante circule sur toi en ligne. Tu :",
-        options: [
-          { text: "Supprimes ton compte tout de suite", correct: false, tip: "Pas forcément nécessaire." },
-          { text: "Gardes des preuves, signales, contactes 3018 + un adulte", correct: true, tip: "Oui. Preuves + 3018 + adulte." },
-          { text: "Réponds publiquement pour te justifier", correct: false, tip: "Ça peut attiser la rumeur." },
-          { text: "Attends que ça passe", correct: false, tip: "Agir tôt est important." }
-        ]
-      },
-      {
-        q: "Tu as participé à des moqueries et tu regrettes. Tu :",
-        options: [
-          { text: "Ne dis rien pour ne pas te faire remarquer", correct: false, tip: "S’arrêter est déjà un pas." },
-          { text: "Arrêtes, soutiens la personne, parles à un adulte si besoin", correct: true, tip: "Oui. Arrêter + soutenir." },
-          { text: "Continues pour ne pas perdre la face", correct: false, tip: "Ça empire tout." },
-          { text: "Dis que tout le monde le faisait", correct: false, tip: "Ça n’excuse pas." }
-        ]
-      },
-      {
-        q: "Un groupe diffuse une photo de toi sans ton accord avec des commentaires moqueurs. C’est :",
-        options: [
-          { text: "Juste une blague de mauvais goût", correct: false, tip: "Non. Cela peut constituer du cyberharcèlement." },
-          { text: "Du cyberharcèlement (potentiellement sanctionnable)", correct: true, tip: "Oui. Garde les preuves et signale." },
-          { text: "Normal sur les réseaux", correct: false, tip: "Ce n’est pas normal." },
-          { text: "Impossible à faire retirer", correct: false, tip: "Le 3018 peut obtenir le retrait rapide." }
-        ]
-      },
-      {
-        q: "En tant que témoin, le plus utile est souvent de :",
-        options: [
-          { text: "Filmer et poster pour dénoncer", correct: false, tip: "Filmer et poster peut aggraver la situation." },
-          { text: "Soutenir discrètement + signaler à un adulte ou au 3018", correct: true, tip: "Oui. Soutien + signalement." },
-          { text: "Confronter les harceleurs seul·e devant tout le monde", correct: false, tip: "Peut être risqué. Passe par des adultes." },
-          { text: "Ne rien faire pour rester neutre", correct: false, tip: "Le silence est souvent vécu comme un soutien aux harceleurs." }
-        ]
-      }
-    ];
+    // Quiz — multi-langue
+    const QUESTIONS_BY_LANG = {
+      fr: [
+        {
+          q: "Des messages insultants arrivent chaque jour dans le groupe de classe. Que faire ?",
+          options: [
+            { text: "Répondre pour défendre la personne", correct: false, tip: "Répondre peut alimenter le conflit." },
+            { text: "Soutenir en privé + signaler à un adulte ou au 3018", correct: true, tip: "Oui. Soutien discret + alerte." },
+            { text: "Ignorer : ce n’est que des messages", correct: false, tip: "Le cyberharcèlement a des effets réels." },
+            { text: "Partager pour montrer que c’est grave", correct: false, tip: "Ça diffuse encore plus l’humiliation." }
+          ]
+        },
+        {
+          q: "Tu vois quelqu’un isolé et moqué. Tu n’es pas ami avec lui. Tu peux :",
+          options: [
+            { text: "Ne rien faire", correct: false, tip: "Les témoins ont un vrai pouvoir." },
+            { text: "Le rejoindre un peu + en parler à un adulte si ça continue", correct: true, tip: "Exact. Présence + signalement." },
+            { text: "Filmer et poster pour dénoncer", correct: false, tip: "Peut devenir du cyberharcèlement." },
+            { text: "Rire avec les autres pour ne pas être la cible", correct: false, tip: "Ça renforce le harcèlement." }
+          ]
+        },
+        {
+          q: "Quel est le numéro unique gratuit contre le harcèlement et le cyberharcèlement ?",
+          options: [
+            { text: "15", correct: false, tip: "C’est le SAMU." },
+            { text: "3018", correct: true, tip: "Parfait. Gratuit, anonyme, 9h-23h." },
+            { text: "112", correct: false, tip: "Urgences européennes." },
+            { text: "0800 200 000", correct: false, tip: "Ce n’est pas le bon numéro." }
+          ]
+        },
+        {
+          q: "Une rumeur humiliante circule sur toi en ligne. Tu :",
+          options: [
+            { text: "Supprimes ton compte tout de suite", correct: false, tip: "Pas forcément nécessaire." },
+            { text: "Gardes des preuves, signales, contactes 3018 + un adulte", correct: true, tip: "Oui. Preuves + 3018 + adulte." },
+            { text: "Réponds publiquement pour te justifier", correct: false, tip: "Ça peut attiser la rumeur." },
+            { text: "Attends que ça passe", correct: false, tip: "Agir tôt est important." }
+          ]
+        },
+        {
+          q: "Tu as participé à des moqueries et tu regrettes. Tu :",
+          options: [
+            { text: "Ne dis rien pour ne pas te faire remarquer", correct: false, tip: "S’arrêter est déjà un pas." },
+            { text: "Arrêtes, soutiens la personne, parles à un adulte si besoin", correct: true, tip: "Oui. Arrêter + soutenir." },
+            { text: "Continues pour ne pas perdre la face", correct: false, tip: "Ça empire tout." },
+            { text: "Dis que tout le monde le faisait", correct: false, tip: "Ça n’excuse pas." }
+          ]
+        },
+        {
+          q: "Un groupe diffuse une photo de toi sans ton accord avec des commentaires moqueurs. C’est :",
+          options: [
+            { text: "Juste une blague de mauvais goût", correct: false, tip: "Non. Cela peut constituer du cyberharcèlement." },
+            { text: "Du cyberharcèlement (potentiellement sanctionnable)", correct: true, tip: "Oui. Garde les preuves et signale." },
+            { text: "Normal sur les réseaux", correct: false, tip: "Ce n’est pas normal." },
+            { text: "Impossible à faire retirer", correct: false, tip: "Le 3018 peut obtenir le retrait rapide." }
+          ]
+        },
+        {
+          q: "En tant que témoin, le plus utile est souvent de :",
+          options: [
+            { text: "Filmer et poster pour dénoncer", correct: false, tip: "Filmer et poster peut aggraver la situation." },
+            { text: "Soutenir discrètement + signaler à un adulte ou au 3018", correct: true, tip: "Oui. Soutien + signalement." },
+            { text: "Confronter les harceleurs seul·e devant tout le monde", correct: false, tip: "Peut être risqué. Passe par des adultes." },
+            { text: "Ne rien faire pour rester neutre", correct: false, tip: "Le silence est souvent vécu comme un soutien aux harceleurs." }
+          ]
+        }
+      ],
+      en: [
+        {
+          q: "Insulting messages arrive every day in the class group chat. What should you do?",
+          options: [
+            { text: "Reply to defend the person", correct: false, tip: "Replying can fuel the conflict." },
+            { text: "Support privately + report to an adult or 3018", correct: true, tip: "Yes. Quiet support + alert." },
+            { text: "Ignore it — it's only messages", correct: false, tip: "Cyberbullying has real effects." },
+            { text: "Share it to show how serious it is", correct: false, tip: "That spreads the humiliation further." }
+          ]
+        },
+        {
+          q: "You see someone isolated and mocked. You're not friends. You can:",
+          options: [
+            { text: "Do nothing", correct: false, tip: "Bystanders have real power." },
+            { text: "Join them a little + tell an adult if it continues", correct: true, tip: "Exactly. Presence + reporting." },
+            { text: "Film and post to expose it", correct: false, tip: "Can become cyberbullying itself." },
+            { text: "Laugh along so you're not the target", correct: false, tip: "That reinforces the bullying." }
+          ]
+        },
+        {
+          q: "What is the free unique number against bullying and cyberbullying?",
+          options: [
+            { text: "15", correct: false, tip: "That's the emergency medical service." },
+            { text: "3018", correct: true, tip: "Perfect. Free, anonymous, 9am–11pm." },
+            { text: "112", correct: false, tip: "European emergency number." },
+            { text: "0800 200 000", correct: false, tip: "That's not the right number." }
+          ]
+        },
+        {
+          q: "A humiliating rumour about you is circulating online. You:",
+          options: [
+            { text: "Delete your account right away", correct: false, tip: "Not necessarily needed." },
+            { text: "Keep evidence, report, contact 3018 + an adult", correct: true, tip: "Yes. Evidence + 3018 + adult." },
+            { text: "Reply publicly to justify yourself", correct: false, tip: "That can feed the rumour." },
+            { text: "Wait for it to blow over", correct: false, tip: "Acting early matters." }
+          ]
+        },
+        {
+          q: "You took part in mockery and you regret it. You:",
+          options: [
+            { text: "Say nothing so you don't stand out", correct: false, tip: "Stopping is already a step." },
+            { text: "Stop, support the person, talk to an adult if needed", correct: true, tip: "Yes. Stop + support." },
+            { text: "Keep going so you don't lose face", correct: false, tip: "That makes everything worse." },
+            { text: "Say everyone was doing it", correct: false, tip: "That doesn't excuse it." }
+          ]
+        },
+        {
+          q: "A group shares a photo of you without consent with mocking comments. This is:",
+          options: [
+            { text: "Just a tasteless joke", correct: false, tip: "No. This can be cyberbullying." },
+            { text: "Cyberbullying (potentially punishable)", correct: true, tip: "Yes. Keep evidence and report." },
+            { text: "Normal on social media", correct: false, tip: "It is not normal." },
+            { text: "Impossible to get taken down", correct: false, tip: "3018 can help get fast removal." }
+          ]
+        },
+        {
+          q: "As a bystander, the most useful thing is often to:",
+          options: [
+            { text: "Film and post to denounce it", correct: false, tip: "Filming and posting can make it worse." },
+            { text: "Support quietly + report to an adult or 3018", correct: true, tip: "Yes. Support + reporting." },
+            { text: "Confront the bullies alone in front of everyone", correct: false, tip: "Can be risky. Go through adults." },
+            { text: "Do nothing to stay neutral", correct: false, tip: "Silence is often felt as support for the bullies." }
+          ]
+        }
+      ],
+      zh: [
+        {
+          q: "班级群里每天都有侮辱性消息。应该怎么做？",
+          options: [
+            { text: "回击为当事人辩护", correct: false, tip: "回击可能加剧冲突。" },
+            { text: "私下支持 + 向成人或3018报告", correct: true, tip: "对。悄悄支持 + 报警。" },
+            { text: "忽略：只是消息而已", correct: false, tip: "网络欺凌有真实影响。" },
+            { text: "转发以显示情况严重", correct: false, tip: "这会进一步传播羞辱。" }
+          ]
+        },
+        {
+          q: "你看到有人被孤立和嘲笑。你不是他的朋友。你可以：",
+          options: [
+            { text: "什么都不做", correct: false, tip: "旁观者有真正的力量。" },
+            { text: "稍稍靠近他 + 如果继续就告诉成人", correct: true, tip: "正确。陪伴 + 报告。" },
+            { text: "拍摄并发布以揭露", correct: false, tip: "可能本身变成网络欺凌。" },
+            { text: "跟着笑以免成为目标", correct: false, tip: "这会强化欺凌。" }
+          ]
+        },
+        {
+          q: "反对欺凌和网络欺凌的免费统一号码是？",
+          options: [
+            { text: "15", correct: false, tip: "那是急救电话。" },
+            { text: "3018", correct: true, tip: "完美。免费、匿名，9点至23点。" },
+            { text: "112", correct: false, tip: "欧洲紧急号码。" },
+            { text: "0800 200 000", correct: false, tip: "不是正确号码。" }
+          ]
+        },
+        {
+          q: "网上流传关于你的羞辱性谣言。你：",
+          options: [
+            { text: "立即删除账号", correct: false, tip: "不一定必要。" },
+            { text: "保留证据、举报、联系3018和成人", correct: true, tip: "对。证据 + 3018 + 成人。" },
+            { text: "公开回复为自己辩解", correct: false, tip: "可能助长谣言。" },
+            { text: "等它自己过去", correct: false, tip: "尽早行动很重要。" }
+          ]
+        },
+        {
+          q: "你参与了嘲笑并感到后悔。你：",
+          options: [
+            { text: "什么都不说以免引人注意", correct: false, tip: "停止已经是一步。" },
+            { text: "停止、支持对方、需要时找成人谈", correct: true, tip: "对。停止 + 支持。" },
+            { text: "继续以免丢面子", correct: false, tip: "只会更糟。" },
+            { text: "说大家都在做", correct: false, tip: "这不能成为借口。" }
+          ]
+        },
+        {
+          q: "一群人未经同意分享你的照片并配以嘲笑评论。这是：",
+          options: [
+            { text: "只是一个品味差的玩笑", correct: false, tip: "不。这可能构成网络欺凌。" },
+            { text: "网络欺凌（可能受处罚）", correct: true, tip: "对。保留证据并举报。" },
+            { text: "社交媒体上很正常", correct: false, tip: "这不正常。" },
+            { text: "无法删除", correct: false, tip: "3018可以帮助快速删除。" }
+          ]
+        },
+        {
+          q: "作为旁观者，最有用的往往是：",
+          options: [
+            { text: "拍摄并发布以谴责", correct: false, tip: "拍摄发布可能使情况恶化。" },
+            { text: "悄悄支持 + 向成人或3018报告", correct: true, tip: "对。支持 + 报告。" },
+            { text: "独自当众对抗欺凌者", correct: false, tip: "可能有风险。通过成人。" },
+            { text: "什么都不做以保持中立", correct: false, tip: "沉默常被感受为对欺凌者的支持。" }
+          ]
+        }
+      ],
+      th: [
+        {
+          q: "มีข้อความดูถูกในกลุ่มชั้นเรียนทุกวัน ควรทำอย่างไร?",
+          options: [
+            { text: "ตอบกลับเพื่อปกป้องคนนั้น", correct: false, tip: "การตอบกลับอาจทำให้ความขัดแย้งรุนแรงขึ้น" },
+            { text: "สนับสนุนแบบส่วนตัว + แจ้งผู้ใหญ่หรือ 3018", correct: true, tip: "ใช่ ช่วยเหลือเงียบ ๆ + แจ้งเตือน" },
+            { text: "เพิกเฉย เพราะเป็นแค่ข้อความ", correct: false, tip: "การกลั่นแกล้งออนไลน์มีผลกระทบจริง" },
+            { text: "แชร์เพื่อแสดงว่ามันร้ายแรง", correct: false, tip: "นั่นยิ่งกระจายความอับอาย" }
+          ]
+        },
+        {
+          q: "คุณเห็นคนถูกโดดเดี่ยวและถูกเยาะเย้ย คุณไม่ใช่เพื่อน เขา คุณสามารถ:",
+          options: [
+            { text: "ไม่ทำอะไร", correct: false, tip: "ผู้เห็นเหตุการณ์มีพลังจริง" },
+            { text: "เข้าไปอยู่ด้วยเล็กน้อย + บอกผู้ใหญ่ถ้ายังดำเนินต่อ", correct: true, tip: "ถูกต้อง การอยู่ด้วย + รายงาน" },
+            { text: "ถ่ายวิดีโอแล้วโพสต์เพื่อเปิดโปง", correct: false, tip: "อาจกลายเป็นการกลั่นแกล้งออนไลน์เอง" },
+            { text: "หัวเราะไปด้วยเพื่อไม่ให้เป็นเป้า", correct: false, tip: "นั่นยิ่งเสริมพฤติกรรมกลั่นแกล้ง" }
+          ]
+        },
+        {
+          q: "หมายเลขฟรีเดียวสำหรับต่อต้านการกลั่นแกล้งและไซเบอร์คือ?",
+          options: [
+            { text: "15", correct: false, tip: "นั่นคือบริการฉุกเฉินทางการแพทย์" },
+            { text: "3018", correct: true, tip: "ถูกต้อง ฟรี ไม่ระบุตัวตน 9:00–23:00" },
+            { text: "112", correct: false, tip: "หมายเลขฉุกเฉินยุโรป" },
+            { text: "0800 200 000", correct: false, tip: "ไม่ใช่หมายเลขที่ถูกต้อง" }
+          ]
+        },
+        {
+          q: "มีข่าวลือที่ทำให้ขายหน้าเกี่ยวกับคุณออนไลน์ คุณ:",
+          options: [
+            { text: "ลบบัญชีทันที", correct: false, tip: "ไม่จำเป็นเสมอไป" },
+            { text: "เก็บหลักฐาน แจ้ง ติดต่อ 3018 + ผู้ใหญ่", correct: true, tip: "ใช่ หลักฐาน + 3018 + ผู้ใหญ่" },
+            { text: "ตอบกลับสาธารณะเพื่อแก้ตัว", correct: false, tip: "อาจยิ่งทำให้ข่าวลือแพร่" },
+            { text: "รอให้มันเงียบไปเอง", correct: false, tip: "การลงมือเร็วสำคัญ" }
+          ]
+        },
+        {
+          q: "คุณเคยร่วมเยาะเย้ยและเสียใจ คุณ:",
+          options: [
+            { text: "ไม่พูดอะไรเพื่อไม่ให้เด่น", correct: false, tip: "การหยุดแล้วคือก้าวแรก" },
+            { text: "หยุด สนับสนุนคนนั้น พูดกับผู้ใหญ่ถ้าต้องการ", correct: true, tip: "ใช่ หยุด + สนับสนุน" },
+            { text: "ทำต่อเพื่อไม่เสียหน้า", correct: false, tip: "ยิ่งทำให้แย่ลง" },
+            { text: "บอกว่าทุกคนก็ทำ", correct: false, tip: "นั่นไม่ใช่ข้อแก้ตัว" }
+          ]
+        },
+        {
+          q: "กลุ่มหนึ่งแชร์รูปคุณโดยไม่ได้รับอนุญาตพร้อมคอมเมนต์เยาะเย้ย นี่คือ:",
+          options: [
+            { text: "แค่เรื่องตลกที่ไม่สุภาพ", correct: false, tip: "ไม่ นี่อาจเป็นการกลั่นแกล้งออนไลน์" },
+            { text: "การกลั่นแกล้งออนไลน์ (อาจถูกลงโทษ)", correct: true, tip: "ใช่ เก็บหลักฐานและแจ้ง" },
+            { text: "ปกติบนโซเชียลมีเดีย", correct: false, tip: "นี่ไม่ปกติ" },
+            { text: "ลบออกไม่ได้", correct: false, tip: "3018 ช่วยให้ถูกลบเร็วได้" }
+          ]
+        },
+        {
+          q: "ในฐานะผู้เห็นเหตุการณ์ สิ่งที่มีประโยชน์ที่สุดมักคือ:",
+          options: [
+            { text: "ถ่ายแล้วโพสต์เพื่อประณาม", correct: false, tip: "การถ่ายโพสต์อาจทำให้แย่ลง" },
+            { text: "สนับสนุนเงียบ ๆ + แจ้งผู้ใหญ่หรือ 3018", correct: true, tip: "ใช่ สนับสนุน + รายงาน" },
+            { text: "เผชิญหน้าผู้กลั่นแกล้งคนเดียวต่อหน้าทุกคน", correct: false, tip: "อาจเสี่ยง ไปผ่านผู้ใหญ่" },
+            { text: "ไม่ทำอะไรเพื่อเป็นกลาง", correct: false, tip: "ความเงียบมักถูกมองว่าสนับสนุนผู้กลั่นแกล้ง" }
+          ]
+        }
+      ],
+      es: [
+        {
+          q: "Llegan mensajes insultantes cada día en el grupo de clase. ¿Qué hacer?",
+          options: [
+            { text: "Responder para defender a la persona", correct: false, tip: "Responder puede alimentar el conflicto." },
+            { text: "Apoyar en privado + avisar a un adulto o al 3018", correct: true, tip: "Sí. Apoyo discreto + alerta." },
+            { text: "Ignorar: solo son mensajes", correct: false, tip: "El ciberacoso tiene efectos reales." },
+            { text: "Compartir para mostrar que es grave", correct: false, tip: "Eso difunde aún más la humillación." }
+          ]
+        },
+        {
+          q: "Ves a alguien aislado y burlado. No eres su amigo. Puedes:",
+          options: [
+            { text: "No hacer nada", correct: false, tip: "Los testigos tienen un verdadero poder." },
+            { text: "Acercarte un poco + hablar con un adulto si continúa", correct: true, tip: "Exacto. Presencia + denuncia." },
+            { text: "Filmar y publicar para denunciar", correct: false, tip: "Puede convertirse en ciberacoso." },
+            { text: "Reírte con los demás para no ser el blanco", correct: false, tip: "Eso refuerza el acoso." }
+          ]
+        },
+        {
+          q: "¿Cuál es el número único gratuito contra el acoso y el ciberacoso?",
+          options: [
+            { text: "15", correct: false, tip: "Es el SAMU." },
+            { text: "3018", correct: true, tip: "Perfecto. Gratuito, anónimo, 9h-23h." },
+            { text: "112", correct: false, tip: "Urgencias europeas." },
+            { text: "0800 200 000", correct: false, tip: "No es el número correcto." }
+          ]
+        },
+        {
+          q: "Circula un rumor humillante sobre ti en línea. Tú:",
+          options: [
+            { text: "Borras tu cuenta de inmediato", correct: false, tip: "No es necesariamente necesario." },
+            { text: "Guardas pruebas, denuncias, contactas 3018 + un adulto", correct: true, tip: "Sí. Pruebas + 3018 + adulto." },
+            { text: "Respondes en público para justificarte", correct: false, tip: "Puede avivar el rumor." },
+            { text: "Esperas a que pase", correct: false, tip: "Actuar pronto es importante." }
+          ]
+        },
+        {
+          q: "Has participado en burlas y te arrepientes. Tú:",
+          options: [
+            { text: "No dices nada para no llamar la atención", correct: false, tip: "Parar ya es un paso." },
+            { text: "Paras, apoyas a la persona, hablas con un adulto si hace falta", correct: true, tip: "Sí. Parar + apoyar." },
+            { text: "Sigues para no quedar mal", correct: false, tip: "Empeora todo." },
+            { text: "Dices que todo el mundo lo hacía", correct: false, tip: "Eso no justifica." }
+          ]
+        },
+        {
+          q: "Un grupo difunde una foto tuya sin tu consentimiento con comentarios burlones. Es:",
+          options: [
+            { text: "Solo una broma de mal gusto", correct: false, tip: "No. Puede ser ciberacoso." },
+            { text: "Ciberacoso (potencialmente sancionable)", correct: true, tip: "Sí. Guarda pruebas y denuncia." },
+            { text: "Normal en las redes", correct: false, tip: "No es normal." },
+            { text: "Imposible de retirar", correct: false, tip: "El 3018 puede obtener la retirada rápida." }
+          ]
+        },
+        {
+          q: "Como testigo, lo más útil suele ser:",
+          options: [
+            { text: "Filmar y publicar para denunciar", correct: false, tip: "Filmar y publicar puede agravar la situación." },
+            { text: "Apoyar discretamente + avisar a un adulto o al 3018", correct: true, tip: "Sí. Apoyo + denuncia." },
+            { text: "Confrontar a los acosadores solo delante de todos", correct: false, tip: "Puede ser arriesgado. Pasa por adultos." },
+            { text: "No hacer nada para permanecer neutral", correct: false, tip: "El silencio se vive a menudo como apoyo a los acosadores." }
+          ]
+        }
+      ],
+      pt: [
+        {
+          q: "Mensagens insultuosas chegam todos os dias no grupo da turma. O que fazer?",
+          options: [
+            { text: "Responder para defender a pessoa", correct: false, tip: "Responder pode alimentar o conflito." },
+            { text: "Apoiar em privado + avisar um adulto ou o 3018", correct: true, tip: "Sim. Apoio discreto + alerta." },
+            { text: "Ignorar: são só mensagens", correct: false, tip: "O ciberbullying tem efeitos reais." },
+            { text: "Partilhar para mostrar que é grave", correct: false, tip: "Isso espalha ainda mais a humilhação." }
+          ]
+        },
+        {
+          q: "Vês alguém isolado e gozado. Não és amigo dele. Podes:",
+          options: [
+            { text: "Não fazer nada", correct: false, tip: "As testemunhas têm um verdadeiro poder." },
+            { text: "Aproximar-te um pouco + falar a um adulto se continuar", correct: true, tip: "Exato. Presença + denúncia." },
+            { text: "Filmar e publicar para denunciar", correct: false, tip: "Pode tornar-se ciberbullying." },
+            { text: "Rir com os outros para não seres o alvo", correct: false, tip: "Isso reforça o bullying." }
+          ]
+        },
+        {
+          q: "Qual é o número único gratuito contra o bullying e o ciberbullying?",
+          options: [
+            { text: "15", correct: false, tip: "É o SAMU." },
+            { text: "3018", correct: true, tip: "Perfeito. Gratuito, anónimo, 9h-23h." },
+            { text: "112", correct: false, tip: "Emergências europeias." },
+            { text: "0800 200 000", correct: false, tip: "Não é o número certo." }
+          ]
+        },
+        {
+          q: "Um rumor humilhante sobre ti circula online. Tu:",
+          options: [
+            { text: "Apagas a conta de imediato", correct: false, tip: "Não é necessariamente necessário." },
+            { text: "Guardas provas, denuncias, contactas 3018 + um adulto", correct: true, tip: "Sim. Provas + 3018 + adulto." },
+            { text: "Respondes em público para te justificares", correct: false, tip: "Pode alimentar o rumor." },
+            { text: "Esperas que passe", correct: false, tip: "Agir cedo é importante." }
+          ]
+        },
+        {
+          q: "Participaste em gozos e arrependes-te. Tu:",
+          options: [
+            { text: "Não dizes nada para não te notarem", correct: false, tip: "Parar já é um passo." },
+            { text: "Paras, apoias a pessoa, falas com um adulto se precisares", correct: true, tip: "Sim. Parar + apoiar." },
+            { text: "Continuas para não perder a face", correct: false, tip: "Piora tudo." },
+            { text: "Dizes que toda a gente o fazia", correct: false, tip: "Isso não justifica." }
+          ]
+        },
+        {
+          q: "Um grupo difunde uma foto tua sem o teu acordo com comentários gozões. É:",
+          options: [
+            { text: "Só uma brincadeira de mau gosto", correct: false, tip: "Não. Pode constituir ciberbullying." },
+            { text: "Ciberbullying (potencialmente sancionável)", correct: true, tip: "Sim. Guarda provas e denuncia." },
+            { text: "Normal nas redes", correct: false, tip: "Não é normal." },
+            { text: "Impossível de retirar", correct: false, tip: "O 3018 pode obter a retirada rápida." }
+          ]
+        },
+        {
+          q: "Como testemunha, o mais útil é muitas vezes:",
+          options: [
+            { text: "Filmar e publicar para denunciar", correct: false, tip: "Filmar e publicar pode agravar a situação." },
+            { text: "Apoiar discretamente + avisar um adulto ou o 3018", correct: true, tip: "Sim. Apoio + denúncia." },
+            { text: "Confrontar os agressores sozinho à frente de todos", correct: false, tip: "Pode ser arriscado. Passa por adultos." },
+            { text: "Não fazer nada para ficar neutro", correct: false, tip: "O silêncio é muitas vezes sentido como apoio aos agressores." }
+          ]
+        }
+      ],
+      ar: [
+        {
+          q: "تصل رسائل مسيئة كل يوم في مجموعة الصف. ماذا تفعل؟",
+          options: [
+            { text: "الرد للدفاع عن الشخص", correct: false, tip: "الرد قد يغذي الصراع." },
+            { text: "الدعم بشكل خاص + إبلاغ شخص بالغ أو 3018", correct: true, tip: "نعم. دعم هادئ + تنبيه." },
+            { text: "التجاهل: مجرد رسائل", correct: false, tip: "التنمر الإلكتروني له آثار حقيقية." },
+            { text: "المشاركة لإظهار أن الأمر خطير", correct: false, tip: "هذا ينشر الإذلال أكثر." }
+          ]
+        },
+        {
+          q: "ترى شخصًا معزولًا ومُسخرًا منه. لست صديقه. يمكنك:",
+          options: [
+            { text: "عدم فعل شيء", correct: false, tip: "للشهود قوة حقيقية." },
+            { text: "الانضمام إليه قليلاً + إخبار شخص بالغ إذا استمر", correct: true, tip: "صحيح. الحضور + الإبلاغ." },
+            { text: "التصوير والنشر للفضح", correct: false, tip: "قد يصبح تنمرًا إلكترونيًا." },
+            { text: "الضحك مع الآخرين حتى لا تكون الهدف", correct: false, tip: "هذا يعزز التنمر." }
+          ]
+        },
+        {
+          q: "ما هو الرقم المجاني الوحيد ضد التنمر والتنمر الإلكتروني؟",
+          options: [
+            { text: "15", correct: false, tip: "هذا رقم الإسعاف." },
+            { text: "3018", correct: true, tip: "ممتاز. مجاني، مجهول، 9ص–11م." },
+            { text: "112", correct: false, tip: "رقم الطوارئ الأوروبي." },
+            { text: "0800 200 000", correct: false, tip: "ليس الرقم الصحيح." }
+          ]
+        },
+        {
+          q: "شائعة مهينة عنك تنتشر عبر الإنترنت. أنت:",
+          options: [
+            { text: "تحذف حسابك فورًا", correct: false, tip: "ليس ضروريًا دائمًا." },
+            { text: "تحتفظ بالأدلة، تبلغ، تتصل بـ 3018 + شخص بالغ", correct: true, tip: "نعم. أدلة + 3018 + شخص بالغ." },
+            { text: "ترد علنًا لتبرير نفسك", correct: false, tip: "قد يغذي الشائعة." },
+            { text: "تنتظر حتى تمر", correct: false, tip: "التصرف مبكرًا مهم." }
+          ]
+        },
+        {
+          q: "شاركت في السخرية وتندم. أنت:",
+          options: [
+            { text: "لا تقول شيئًا حتى لا تُلاحظ", correct: false, tip: "التوقف خطوة بالفعل." },
+            { text: "تتوقف، تدعم الشخص، تتحدث مع شخص بالغ إن لزم", correct: true, tip: "نعم. توقف + دعم." },
+            { text: "تستمر حتى لا تفقد ماء الوجه", correct: false, tip: "يزيد الأمر سوءًا." },
+            { text: "تقول إن الجميع كان يفعل ذلك", correct: false, tip: "هذا لا يبرر." }
+          ]
+        },
+        {
+          q: "مجموعة تنشر صورتك دون موافقتك مع تعليقات ساخرة. هذا:",
+          options: [
+            { text: "مجرد مزحة سيئة الذوق", correct: false, tip: "لا. قد يشكل تنمرًا إلكترونيًا." },
+            { text: "تنمر إلكتروني (قد يُعاقب عليه)", correct: true, tip: "نعم. احتفظ بالأدلة وأبلغ." },
+            { text: "طبيعي على الشبكات", correct: false, tip: "ليس طبيعيًا." },
+            { text: "مستحيل إزالته", correct: false, tip: "يمكن لـ 3018 المساعدة في الإزالة السريعة." }
+          ]
+        },
+        {
+          q: "كشاهد، الأكثر فائدة غالبًا هو:",
+          options: [
+            { text: "التصوير والنشر للإدانة", correct: false, tip: "التصوير والنشر قد يزيد الوضع سوءًا." },
+            { text: "الدعم بهدوء + الإبلاغ لشخص بالغ أو 3018", correct: true, tip: "نعم. دعم + إبلاغ." },
+            { text: "مواجهة المتنمرين وحدك أمام الجميع", correct: false, tip: "قد يكون محفوفًا. مر عبر البالغين." },
+            { text: "عدم فعل شيء للبقاء محايدًا", correct: false, tip: "الصمت غالبًا ما يُشعر كدعم للمتنمرين." }
+          ]
+        }
+      ]
+    };
 
+    let questions = QUESTIONS_BY_LANG.fr;
     let idx = 0, score = 0, locked = false;
 
     function render() {
@@ -1343,11 +2300,13 @@
       html += `</div><div class="fb" id="fb"></div>`;
       document.getElementById('quizArea').innerHTML = html;
       document.getElementById('prog').style.width = (idx / questions.length * 100) + '%';
-      document.getElementById('scoreTxt').textContent = `Score : ${score} / ${questions.length}`;
+      const scoreLabel = (I18N[currentLang] && I18N[currentLang].scoreLabel) || "Score";
+      document.getElementById('scoreTxt').textContent = `${scoreLabel} : ${score} / ${questions.length}`;
     }
 
     function choose(i) {
       if (locked) return;
+      markQuizStart();
       locked = true;
       const q = questions[idx];
       const opt = q.options[i];
@@ -1367,8 +2326,11 @@
         fb.className = 'fb show bad';
         fb.textContent = '✗ ' + opt.tip;
       }
-      document.getElementById('scoreTxt').textContent = `Score : ${score} / ${questions.length}`;
+      const scoreLabel = (I18N[currentLang] && I18N[currentLang].scoreLabel) || "Score";
+      document.getElementById('scoreTxt').textContent = `${scoreLabel} : ${score} / ${questions.length}`;
       document.getElementById('nextBtn').style.display = 'inline-flex';
+      const nextTxt = (I18N[currentLang] && I18N[currentLang].btnNext) || "Suivant →";
+      document.getElementById('nextBtn').textContent = nextTxt;
       document.getElementById('prog').style.width = ((idx + 1) / questions.length * 100) + '%';
     }
 
@@ -1377,26 +2339,27 @@
       if (idx < questions.length) {
         render();
       } else {
+        const t = I18N[currentLang] || I18N.fr;
         const msg = score >= 5
-          ? 'Très bons réflexes. Tu sais déjà comment agir.'
+          ? (t.quizEndGood || 'Très bons réflexes. Tu sais déjà comment agir.')
           : score >= 3
-          ? 'Bien. Voici les points essentiels à retenir.'
-          : 'L’important, c’est d’avoir appris les bons réflexes.';
+          ? (t.quizEndOk || 'Bien. Voici les points essentiels à retenir.')
+          : (t.quizEndLow || 'L’important, c’est d’avoir appris les bons réflexes.');
         document.getElementById('quizArea').innerHTML = `
           <div class="quiz-end">
             <div class="quiz-end-icon">✓</div>
-            <h3>Quiz terminé</h3>
+            <h3>${t.quizDone || 'Quiz terminé'}</h3>
             <div class="score-big">${score} / ${questions.length}</div>
             <p>${msg}</p>
             <ul>
-              <li>Soutenir en privé + signaler à un adulte</li>
-              <li>Garder des preuves (captures, dates)</li>
-              <li>Contacter le 3018 si besoin</li>
-              <li>Ne pas diffuser ni alimenter le conflit</li>
+              <li>${t.quizTip1 || 'Soutenir en privé + signaler à un adulte'}</li>
+              <li>${t.quizTip2 || 'Garder des preuves (captures, dates)'}</li>
+              <li>${t.quizTip3 || 'Contacter le 3018 si besoin'}</li>
+              <li>${t.quizTip4 || 'Ne pas diffuser ni alimenter le conflit'}</li>
             </ul>
             <div class="quiz-end-actions">
-              <a href="https://www.3018.fr" target="_blank" rel="noopener" class="btn btn-main">Aller sur 3018.fr</a>
-              <button class="btn btn-ghost" onclick="restartQuiz()">Recommencer</button>
+              <a href="https://www.3018.fr" target="_blank" rel="noopener" class="btn btn-main">${t.quizGo3018 || 'Aller sur 3018.fr'}</a>
+              <button class="btn btn-ghost" onclick="restartQuiz()">${t.quizRestart || 'Recommencer'}</button>
             </div>
           </div>`;
         document.getElementById('nextBtn').style.display = 'none';
@@ -1405,6 +2368,7 @@
 
     function restartQuiz() {
       idx = 0; score = 0;
+      questions = QUESTIONS_BY_LANG[currentLang] || QUESTIONS_BY_LANG.fr;
       render();
     }
 
@@ -1482,7 +2446,1555 @@
       }
     } catch (e) {}
 
+
+    // ===== LIVE COUNTERS (countapi.mileshilliard.com) =====
+    const COUNT_API = "https://countapi.mileshilliard.com/api/v1";
+    const KEYS = {
+      total: "lfm2026-agir-views-total",
+      today: "lfm2026-agir-views-" + new Date().toISOString().slice(0, 10),
+      pledges: "lfm2026-agir-pledges",
+      quiz: "lfm2026-agir-quiz-done",
+      quizStart: "lfm2026-agir-quiz-start",
+      timeMin: "lfm2026-agir-time-minutes",
+      sec_essentiel: "lfm2026-agir-sec-essentiel",
+      sec_mythes: "lfm2026-agir-sec-mythes",
+      sec_quiz: "lfm2026-agir-sec-quiz",
+      sec_agir: "lfm2026-agir-sec-agir",
+      sec_check: "lfm2026-agir-sec-check",
+      sec_aide: "lfm2026-agir-sec-aide",
+      sec_engage: "lfm2026-agir-sec-engage"
+    };
+    function hourKey(h) { return "lfm2026-agir-hour-" + h; }
+    const SECTION_LABELS = {
+      sec_essentiel: "L’essentiel",
+      sec_mythes: "Mythes",
+      sec_quiz: "Quiz",
+      sec_agir: "Que faire ?",
+      sec_check: "Checklist",
+      sec_aide: "Aide",
+      sec_engage: "Engagement"
+    };
+
+    async function countGet(key) {
+      try {
+        const r = await fetch(`${COUNT_API}/get/${key}`);
+        if (!r.ok) return 0;
+        const d = await r.json();
+        return Number(d.value) || 0;
+      } catch (e) { return 0; }
+    }
+    async function countHit(key) {
+      try {
+        const r = await fetch(`${COUNT_API}/hit/${key}`);
+        if (!r.ok) return 0;
+        const d = await r.json();
+        return Number(d.value) || 0;
+      } catch (e) { return 0; }
+    }
+
+    function fmt(n) {
+      if (n == null || isNaN(n)) return "—";
+      return n.toLocaleString("fr-FR");
+    }
+
+    async function refreshPublicStats() {
+      const [today, pledges, quiz] = await Promise.all([
+        countGet(KEYS.today),
+        countGet(KEYS.pledges),
+        countGet(KEYS.quiz)
+      ]);
+      const elT = document.getElementById("statViewsToday");
+      const elP = document.getElementById("statPledges");
+      const elQ = document.getElementById("statQuiz");
+      if (elT) elT.textContent = fmt(today);
+      if (elP) elP.textContent = fmt(pledges);
+      if (elQ) elQ.textContent = fmt(quiz);
+    }
+
+    let chartHours = null, chartSections = null, chartFunnel = null;
+
+    function chartDefaults() {
+      const tick = { color: "#9b9bb0", font: { size: 11 } };
+      const grid = { color: "rgba(255,255,255,0.06)" };
+      return {
+        responsive: true,
+        maintainAspectRatio: true,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            backgroundColor: "rgba(12,14,20,0.95)",
+            titleColor: "#fff",
+            bodyColor: "#c4b5fd",
+            borderColor: "rgba(167,139,250,0.3)",
+            borderWidth: 1
+          }
+        },
+        scales: {
+          x: { ticks: tick, grid: grid },
+          y: { ticks: tick, grid: grid, beginAtZero: true, precision: 0 }
+        }
+      };
+    }
+
+    async function refreshAdminStats() {
+      const sectionKeys = Object.keys(SECTION_LABELS);
+      const hourKeys = Array.from({length: 24}, (_, i) => hourKey(i));
+      const results = await Promise.all([
+        countGet(KEYS.total),
+        countGet(KEYS.today),
+        countGet(KEYS.pledges),
+        countGet(KEYS.quiz),
+        countGet(KEYS.quizStart),
+        countGet(KEYS.timeMin),
+        countGet(KEYS.sec_engage),
+        ...sectionKeys.map(k => countGet(KEYS[k])),
+        ...hourKeys.map(k => countGet(k))
+      ]);
+      let i = 0;
+      const total = results[i++];
+      const today = results[i++];
+      const pledges = results[i++];
+      const quiz = results[i++];
+      const quizStart = results[i++];
+      const timeMin = results[i++];
+      const engageN = results[i++];
+      const secVals = results.slice(i, i + sectionKeys.length);
+      i += sectionKeys.length;
+      const hourVals = results.slice(i, i + 24);
+
+      const set = (id, v) => { const e = document.getElementById(id); if (e) e.textContent = (typeof v === "string" ? v : fmt(v)); };
+      set("admTotal", total);
+      set("admToday", today);
+      set("admPledges", pledges);
+      set("admQuiz", quiz);
+      set("admQuizStart", quizStart);
+      const rate = quizStart > 0 ? Math.round((quiz / quizStart) * 100) : 0;
+      set("admQuizRate", quizStart > 0 ? rate + " %" : "—");
+      const engRate = total > 0 ? Math.round((engageN / total) * 100) : 0;
+      set("admEngageRate", total > 0 ? engRate + " %" : "—");
+      const avg = total > 0 ? (timeMin / total) : 0;
+      set("admAvgTime", total > 0 ? (avg < 1 ? "< 1 min" : avg.toFixed(1) + " min") : "—");
+
+      let peakH = 0, peakV = -1;
+      hourVals.forEach((v, h) => { if (v > peakV) { peakV = v; peakH = h; } });
+      set("admPeakHour", peakV > 0 ? peakH + "h UTC" : "—");
+
+      const ranked = sectionKeys
+        .map((k, idx) => ({ key: k, label: SECTION_LABELS[k], n: secVals[idx] || 0 }))
+        .sort((a, b) => b.n - a.n);
+      const top = ranked[0];
+      set("admTopSection", top && top.n > 0 ? top.label : "—");
+
+      // Charts
+      if (typeof Chart === "undefined") {
+        console.warn("Chart.js not loaded");
+        return;
+      }
+      const purple = "rgba(129,140,248,0.85)";
+      const purpleBg = "rgba(129,140,248,0.35)";
+      const pink = "rgba(232,121,249,0.85)";
+      const cyan = "rgba(56,189,248,0.85)";
+      const green = "rgba(52,211,153,0.85)";
+
+      // Hours chart
+      const hLabels = hourVals.map((_, h) => String(h).padStart(2, "0") + "h");
+      const hCtx = document.getElementById("chartHours");
+      if (hCtx) {
+        if (chartHours) {
+          chartHours.data.datasets[0].data = hourVals;
+          chartHours.update();
+        } else {
+          chartHours = new Chart(hCtx, {
+            type: "bar",
+            data: {
+              labels: hLabels,
+              datasets: [{
+                label: "Vues",
+                data: hourVals,
+                backgroundColor: purpleBg,
+                borderColor: purple,
+                borderWidth: 1,
+                borderRadius: 4
+              }]
+            },
+            options: {
+              ...chartDefaults(),
+              plugins: {
+                ...chartDefaults().plugins,
+                legend: { display: false }
+              }
+            }
+          });
+        }
+      }
+
+      // Sections horizontal bar
+      const sLabels = sectionKeys.map(k => SECTION_LABELS[k]);
+      const sData = sectionKeys.map((_, idx) => secVals[idx] || 0);
+      const sCtx = document.getElementById("chartSections");
+      if (sCtx) {
+        if (chartSections) {
+          chartSections.data.datasets[0].data = sData;
+          chartSections.update();
+        } else {
+          chartSections = new Chart(sCtx, {
+            type: "bar",
+            data: {
+              labels: sLabels,
+              datasets: [{
+                label: "Atteintes",
+                data: sData,
+                backgroundColor: [
+                  "rgba(129,140,248,0.5)",
+                  "rgba(168,85,247,0.5)",
+                  "rgba(232,121,249,0.5)",
+                  "rgba(56,189,248,0.5)",
+                  "rgba(52,211,153,0.5)",
+                  "rgba(251,191,36,0.5)",
+                  "rgba(248,113,113,0.5)"
+                ],
+                borderRadius: 6
+              }]
+            },
+            options: {
+              indexAxis: "y",
+              ...chartDefaults(),
+              plugins: { legend: { display: false }, tooltip: chartDefaults().plugins.tooltip }
+            }
+          });
+        }
+      }
+
+      // Funnel
+      const fLabels = ["Vues", "Quiz start", "Quiz fin", "Engagements"];
+      const fData = [total, quizStart, quiz, pledges];
+      const fCtx = document.getElementById("chartFunnel");
+      if (fCtx) {
+        if (chartFunnel) {
+          chartFunnel.data.datasets[0].data = fData;
+          chartFunnel.update();
+        } else {
+          chartFunnel = new Chart(fCtx, {
+            type: "bar",
+            data: {
+              labels: fLabels,
+              datasets: [{
+                label: "Parcours",
+                data: fData,
+                backgroundColor: [purple, pink, cyan, green],
+                borderRadius: 8
+              }]
+            },
+            options: {
+              ...chartDefaults(),
+              plugins: { legend: { display: false }, tooltip: chartDefaults().plugins.tooltip }
+            }
+          });
+        }
+      }
+    }
+
+    async function resetAllStats() {
+      if (!confirm("Réinitialiser TOUTES les stats à 0 ? Irréversible.")) return;
+      if (!confirm("Confirmer encore une fois ?")) return;
+      const sectionKeys = Object.keys(SECTION_LABELS);
+      const keys = [
+        KEYS.total, KEYS.today, KEYS.pledges, KEYS.quiz, KEYS.quizStart, KEYS.timeMin,
+        ...sectionKeys.map(k => KEYS[k]),
+        ...Array.from({length: 24}, (_, i) => hourKey(i))
+      ];
+      // also reset other day keys? only today
+      for (const key of keys) {
+        try {
+          await fetch(`${COUNT_API}/set/${key}?value=0`);
+        } catch (e) {}
+      }
+      await refreshAdminStats();
+      await refreshPublicStats();
+      alert("Stats réinitialisées.");
+    }
+
+
+    // Count a view once per browser session (and once per day for the daily key)
+    async function trackView() {
+      const sessionKey = "lfm-viewed-session";
+      const dayKey = "lfm-viewed-day-" + new Date().toISOString().slice(0, 10);
+      let didHit = false;
+      try {
+        if (!sessionStorage.getItem(sessionKey)) {
+          sessionStorage.setItem(sessionKey, "1");
+          await countHit(KEYS.total);
+          try {
+            const h = new Date().getUTCHours();
+            await countHit(hourKey(h));
+          } catch (err) {}
+          didHit = true;
+        }
+        if (!localStorage.getItem(dayKey)) {
+          localStorage.setItem(dayKey, "1");
+          await countHit(KEYS.today);
+          didHit = true;
+        }
+      } catch (e) {}
+      await refreshPublicStats();
+      if (document.getElementById("adminDash")?.classList.contains("open")) {
+        await refreshAdminStats();
+      }
+    }
+
+    // Hook into pledge success
+    const origDoPledge = typeof doPledge === "function" ? doPledge : null;
+    window.doPledge = async function() {
+      if (!document.getElementById("pledgeCheck")?.checked) return;
+      const already = localStorage.getItem("lfm-pledged");
+      document.getElementById("pledgeOk")?.classList.add("show");
+      document.getElementById("pledgeBtn").style.display = "none";
+      document.getElementById("pledgeCheck").disabled = true;
+      if (!already) {
+        try {
+          localStorage.setItem("lfm-pledged", "1");
+          const n = await countHit(KEYS.pledges);
+          const el = document.getElementById("statPledges");
+          if (el) el.textContent = fmt(n);
+        } catch (e) {}
+      }
+    };
+
+    // Hook quiz end to count completion (once)
+    const origGoNext = typeof goNext === "function" ? goNext : null;
+    // We override after original is defined — inject after render definition later if needed.
+    // Safer: monkey-patch after the quiz functions exist by redefining goNext at the end.
+
+    // Admin fullscreen dashboard — Ctrl+M, code "CloviGuy"
+    (function initAdmin() {
+      const fab = document.getElementById("adminFab");
+      const dash = document.getElementById("adminDash");
+      if (!fab || !dash) return;
+
+      let unlocked = sessionStorage.getItem("lfm-admin-ok") === "1";
+      if (unlocked) fab.classList.add("show");
+
+      async function openAdmin() {
+        if (!unlocked) {
+          const code = prompt("Code créateur :");
+          if (code === null) return;
+          if (code.trim() !== "CloviGuy") {
+            alert("Code incorrect.");
+            return;
+          }
+          unlocked = true;
+          try { sessionStorage.setItem("lfm-admin-ok", "1"); } catch (e) {}
+          fab.classList.add("show");
+        }
+        dash.classList.add("open");
+        document.body.style.overflow = "hidden";
+        await refreshAdminStats();
+      }
+
+      function closeAdmin() {
+        dash.classList.remove("open");
+        document.body.style.overflow = "";
+      }
+
+      fab.addEventListener("click", () => openAdmin());
+      document.getElementById("adminClose")?.addEventListener("click", closeAdmin);
+      document.getElementById("adminRefresh")?.addEventListener("click", () => refreshAdminStats());
+      document.getElementById("adminReset")?.addEventListener("click", () => resetAllStats());
+
+      window.addEventListener("keydown", (e) => {
+        if ((e.ctrlKey || e.metaKey) && (e.key === "m" || e.key === "M")) {
+          e.preventDefault();
+          fab.classList.add("show");
+          openAdmin();
+        }
+        if (e.key === "Escape" && dash.classList.contains("open")) closeAdmin();
+      });
+    })();
+
+
+    // Track which sections people actually reach (once per session)
+    function trackSections() {
+      const map = {
+        essentiel: KEYS.sec_essentiel,
+        mythes: KEYS.sec_mythes,
+        quiz: KEYS.sec_quiz,
+        agir: KEYS.sec_agir,
+        check: KEYS.sec_check,
+        aide: KEYS.sec_aide,
+        engage: KEYS.sec_engage
+      };
+      const seen = new Set();
+      try {
+        const raw = sessionStorage.getItem("lfm-sec-seen");
+        if (raw) JSON.parse(raw).forEach(k => seen.add(k));
+      } catch (e) {}
+
+      const ioSec = new IntersectionObserver((entries) => {
+        entries.forEach(async (e) => {
+          if (!e.isIntersecting) return;
+          const name = e.target.getAttribute("data-section");
+          if (!name || !map[name] || seen.has(name)) return;
+          seen.add(name);
+          try { sessionStorage.setItem("lfm-sec-seen", JSON.stringify([...seen])); } catch (err) {}
+          try { await countHit(map[name]); } catch (err) {}
+          ioSec.unobserve(e.target);
+        });
+      }, { threshold: 0.35 });
+
+      document.querySelectorAll("[data-section]").forEach(el => {
+        const name = el.getAttribute("data-section");
+        if (map[name]) ioSec.observe(el);
+      });
+    }
+
+
+    // ===== i18n FR / EN / ZH / TH =====
+    const I18N = {
+      fr: {
+        navHelp: "Besoin d’aide →",
+        tag: "Semaine LFM · 23-28 novembre 2026",
+        heroTitle: "Prévenir le harcèlement,<br><span>protéger notre santé</span>",
+        heroSub: "Reconnaître. Réagir. Soutenir. Dans le cadre de « Promouvoir, prévenir, accompagner ».",
+        btnQuiz: "Lancer le quiz",
+        btnAct: "Que faire ?",
+        statViews: "vues auj.",
+        statPledges: "engagements",
+        statQuiz: "quiz terminés",
+        sosBtn: "Urgence",
+        sosTitle: "Tu as besoin d’aide maintenant",
+        sosText: "Tu n’es pas seul·e. Contacte le 3018 (gratuit, anonyme) ou un adulte de confiance.",
+        sosSmall: "Appeler ou tchatter · 9h–23h",
+        sosLi1: "Parle à un adulte de confiance (CPE, prof, parent…)",
+        sosLi2: "En danger immédiat → 119 (enfance en danger)",
+        sosLi3: "Garde les preuves (captures, dates)",
+        sosClose: "Fermer",
+        exitMsg: "Avant de partir : le <strong>3018</strong> est gratuit et anonyme si tu as besoin d’aide.",
+        exitGo: "Voir l’aide",
+        exitDismiss: "OK",
+        titleEssentiel: "L’essentiel",
+        subEssentiel: "Trois choses à savoir",
+        titleMythes: "Mythes en 10 secondes",
+        subMythes: "Clique sur une carte pour la retourner",
+        titleQuiz: "Quiz",
+        subQuiz: "7 situations · tes réflexes comptent",
+        titleAgir: "Que faire ?",
+        subAgir: "Selon ta place",
+        titleCheck: "Checklist",
+        subCheck: "Coche ce que tu appliques déjà",
+        titleAide: "Aide immédiate",
+        subAide: "Tu n’es jamais seul·e",
+        titleEngage: "Engagement",
+        subEngage: "Un geste simple",
+        scoreLabel: "Score",
+        btnNext: "Suivant →",
+        quizDone: "Quiz terminé",
+        quizEndGood: "Très bons réflexes. Tu sais déjà comment agir.",
+        quizEndOk: "Bien. Voici les points essentiels à retenir.",
+        quizEndLow: "L’important, c’est d’avoir appris les bons réflexes.",
+        quizTip1: "Soutenir en privé + signaler à un adulte",
+        quizTip2: "Garder des preuves (captures, dates)",
+        quizTip3: "Contacter le 3018 si besoin",
+        quizTip4: "Ne pas diffuser ni alimenter le conflit",
+        quizGo3018: "Aller sur 3018.fr",
+        quizRestart: "Recommencer",
+        card1Title: "Harcèlement",
+        card1Text: "Actes répétés et intentionnels : insultes, exclusion, rumeurs, coups… qui isolent et blessent.",
+        card2Title: "Cyberharcèlement",
+        card2Text: "La même chose en ligne. Messages, photos, rumeurs. Ça compte autant que dans la cour.",
+        card3Title: "Santé",
+        card3Text: "Anxiété, sommeil, confiance, isolement. Le harcèlement touche directement la santé mentale.",
+        calloutText: "Numéro unique gratuit · anonyme · 7j/7 de 9h à 23h",
+        mythLabel: "Mythe",
+        realLabel: "Réalité",
+        flipHint: "Clique pour retourner",
+        myth1: "« C’est juste de la rigolade »",
+        myth1Real: "La répétition et l’intention de nuire transforment une blague en harcèlement.",
+        myth1P: "Ce qui est drôle pour l’un peut détruire l’autre.",
+        myth2: "« Il suffit d’ignorer »",
+        myth2Real: "Ignorer ne fait pas toujours cesser le harcèlement.",
+        myth2P: "L’absence de réaction peut encourager à continuer.",
+        myth3: "« Le cyberharcèlement n’est pas réel »",
+        myth3Real: "Les effets sont très concrets : anxiété, isolement, sommeil.",
+        myth3P: "Les mots sur un écran blessent autant.",
+        myth4: "« Si je parle, ça va empirer »",
+        myth4Real: "Dans la majorité des cas, parler permet d’agir rapidement.",
+        myth4P: "Le silence protège surtout les harceleurs.",
+        tabV: "Victime",
+        tabT: "Témoin",
+        tabA: "Auteur",
+        panelVTitle: "Tu es victime",
+        panelVIntro: "Tu n’es pas responsable. Tu as le droit d’être protégé·e.",
+        panelV1: "Parle à un adulte de confiance (CPE, prof, parent, infirmière…)",
+        panelV2: "Garde les preuves : captures, messages, dates",
+        panelV3: "Contacte le <strong>3018</strong> (gratuit, anonyme)",
+        panelV4: "Ne réponds pas seul·e aux provocations",
+        panelTTitle: "Tu es témoin",
+        panelTIntro: "Ton silence peut être vécu comme un soutien aux harceleurs.",
+        panelT1: "Soutiens discrètement (message, présence)",
+        panelT2: "Ne rejoins jamais les moqueries ou les partages",
+        panelT3: "Signale à un adulte ou au 3018",
+        panelT4: "En ligne : signale le contenu + 3018",
+        panelATitle: "Tu as harcelé",
+        panelAIntro: "S’arrêter est un acte de courage.",
+        panelA1: "Arrête immédiatement",
+        panelA2: "Soutiens la personne plutôt que de te justifier",
+        panelA3: "Parle à un adulte si tu as besoin d’aide",
+        panelA4: "Changer est possible",
+        check1: "Je connais le 3018",
+        check2: "Je sais à qui parler dans mon établissement",
+        check3: "Je ne like / partage jamais de contenus humiliants",
+        check4: "Si je vois une situation, j’agis",
+        check5: "Mes comptes sont en mode privé",
+        checkDone: "Checklist complète. Tu as les bons réflexes.",
+        res3018Title: "Numéro unique",
+        res3018Text: "Harcèlement & cyber. Gratuit, anonyme. 9h-23h.",
+        res119Title: "Enfance en danger",
+        res119Text: "Si tu es en danger. Gratuit, 24h/24.",
+        resPhareTitle: "Programme anti-harcèlement",
+        resPhareText: "Dispositif officiel de ton établissement : équipe ressource, protocoles, prévention.",
+        resAppTitle: "Application 3018",
+        resAppText: "Tchat discret et signalement rapide.",
+        resMore: "En savoir plus →",
+        resDl: "Télécharger →",
+        pledgeTitle: "Je m’engage",
+        pledgeText: "À ne jamais participer au harcèlement, à soutenir les victimes et à utiliser les réseaux de façon responsable.",
+        pledgeLabel: "Je m’engage à respecter les autres, en présentiel comme en ligne.",
+        pledgeBtn: "Valider",
+        pledgeOk: "Merci. Ton engagement compte.",
+        footerTheme: "10ᵉ Semaine des lycées français du monde · 23-28 nov. 2026",
+        footerSlogan: "« Promouvoir, prévenir, accompagner : agissons ensemble pour notre santé ! »",
+        footerNote: "Outil pédagogique de sensibilisation. En cas de détresse → 3018 ou un adulte de confiance.",
+        skipLink: "Aller au quiz"
+      },
+      en: {
+        navHelp: "Need help →",
+        tag: "LFM Week · 23–28 November 2026",
+        heroTitle: "Prevent bullying,<br><span>protect our health</span>",
+        heroSub: "Recognize. React. Support. As part of “Promote, prevent, support”.",
+        btnQuiz: "Start the quiz",
+        btnAct: "What to do?",
+        statViews: "views today",
+        statPledges: "pledges",
+        statQuiz: "quizzes done",
+        sosBtn: "Emergency",
+        sosTitle: "You need help right now",
+        sosText: "You are not alone. Contact 3018 (free, anonymous) or a trusted adult.",
+        sosSmall: "Call or chat · 9am–11pm",
+        sosLi1: "Talk to a trusted adult (counsellor, teacher, parent…)",
+        sosLi2: "Immediate danger → 119 (child protection, France)",
+        sosLi3: "Keep evidence (screenshots, dates)",
+        sosClose: "Close",
+        exitMsg: "Before you go: <strong>3018</strong> is free and anonymous if you need help.",
+        exitGo: "See help",
+        exitDismiss: "OK",
+        titleEssentiel: "The essentials",
+        subEssentiel: "Three things to know",
+        titleMythes: "Myths in 10 seconds",
+        subMythes: "Tap a card to flip it",
+        titleQuiz: "Quiz",
+        subQuiz: "7 situations · your reflexes matter",
+        titleAgir: "What to do?",
+        subAgir: "Depending on your role",
+        titleCheck: "Checklist",
+        subCheck: "Tick what you already do",
+        titleAide: "Immediate help",
+        subAide: "You are never alone",
+        titleEngage: "Pledge",
+        subEngage: "A simple step",
+        scoreLabel: "Score",
+        btnNext: "Next →",
+        quizDone: "Quiz completed",
+        quizEndGood: "Great reflexes. You already know how to act.",
+        quizEndOk: "Good. Here are the key points to remember.",
+        quizEndLow: "What matters is that you learned the right reflexes.",
+        quizTip1: "Support privately + report to an adult",
+        quizTip2: "Keep evidence (screenshots, dates)",
+        quizTip3: "Contact 3018 if needed",
+        quizTip4: "Do not spread or fuel the conflict",
+        quizGo3018: "Go to 3018.fr",
+        quizRestart: "Restart",
+        card1Title: "Bullying",
+        card1Text: "Repeated and intentional acts: insults, exclusion, rumours, hits… that isolate and hurt.",
+        card2Title: "Cyberbullying",
+        card2Text: "The same thing online. Messages, photos, rumours. It counts as much as in the schoolyard.",
+        card3Title: "Health",
+        card3Text: "Anxiety, sleep, confidence, isolation. Bullying directly affects mental health.",
+        calloutText: "Free unique number · anonymous · 7 days a week, 9am–11pm",
+        mythLabel: "Myth",
+        realLabel: "Reality",
+        flipHint: "Tap to flip",
+        myth1: "“It’s just a joke”",
+        myth1Real: "Repetition and the intent to harm turn a joke into bullying.",
+        myth1P: "What is funny for one person can destroy another.",
+        myth2: "“Just ignore it”",
+        myth2Real: "Ignoring does not always make bullying stop.",
+        myth2P: "Lack of reaction can encourage it to continue.",
+        myth3: "“Cyberbullying isn’t real”",
+        myth3Real: "The effects are very concrete: anxiety, isolation, sleep issues.",
+        myth3P: "Words on a screen hurt just as much.",
+        myth4: "“If I speak up, it will get worse”",
+        myth4Real: "In most cases, speaking up allows quick action.",
+        myth4P: "Silence mainly protects the bullies.",
+        tabV: "Victim",
+        tabT: "Bystander",
+        tabA: "Perpetrator",
+        panelVTitle: "You are a victim",
+        panelVIntro: "You are not responsible. You have the right to be protected.",
+        panelV1: "Talk to a trusted adult (counsellor, teacher, parent, nurse…)",
+        panelV2: "Keep evidence: screenshots, messages, dates",
+        panelV3: "Contact <strong>3018</strong> (free, anonymous)",
+        panelV4: "Do not reply alone to provocations",
+        panelTTitle: "You are a bystander",
+        panelTIntro: "Your silence can be felt as support for the bullies.",
+        panelT1: "Support discreetly (message, presence)",
+        panelT2: "Never join in mockery or sharing",
+        panelT3: "Report to an adult or 3018",
+        panelT4: "Online: report the content + 3018",
+        panelATitle: "You have bullied",
+        panelAIntro: "Stopping is an act of courage.",
+        panelA1: "Stop immediately",
+        panelA2: "Support the person rather than justifying yourself",
+        panelA3: "Talk to an adult if you need help",
+        panelA4: "Change is possible",
+        check1: "I know the 3018 number",
+        check2: "I know who to talk to at school",
+        check3: "I never like / share humiliating content",
+        check4: "If I see a situation, I act",
+        check5: "My accounts are set to private",
+        checkDone: "Checklist complete. You have the right reflexes.",
+        res3018Title: "Unique number",
+        res3018Text: "Bullying & cyber. Free, anonymous. 9am–11pm.",
+        res119Title: "Child in danger",
+        res119Text: "If you are in danger. Free, 24/7.",
+        resPhareTitle: "Anti-bullying programme",
+        resPhareText: "Official school scheme: resource team, protocols, prevention.",
+        resAppTitle: "3018 app",
+        resAppText: "Discreet chat and quick reporting.",
+        resMore: "Learn more →",
+        resDl: "Download →",
+        pledgeTitle: "I pledge",
+        pledgeText: "Never to take part in bullying, to support victims and to use social media responsibly.",
+        pledgeLabel: "I pledge to respect others, offline and online.",
+        pledgeBtn: "Confirm",
+        pledgeOk: "Thank you. Your pledge counts.",
+        footerTheme: "10th Week of French High Schools Worldwide · 23–28 Nov 2026",
+        footerSlogan: "“Promote, prevent, support: let’s act together for our health!”",
+        footerNote: "Educational awareness tool. In case of distress → 3018 or a trusted adult.",
+        skipLink: "Skip to quiz"
+      },
+      zh: {
+        navHelp: "需要帮助 →",
+        tag: "LFM 周 · 2026年11月23–28日",
+        heroTitle: "预防欺凌，<br><span>保护我们的健康</span>",
+        heroSub: "识别。行动。支持。在「促进、预防、陪伴」框架下。",
+        btnQuiz: "开始测验",
+        btnAct: "该怎么做？",
+        statViews: "今日浏览",
+        statPledges: "承诺数",
+        statQuiz: "已完成测验",
+        sosBtn: "紧急",
+        sosTitle: "你现在需要帮助",
+        sosText: "你并不孤单。联系 3018（免费、匿名）或可信的成人。",
+        sosSmall: "拨打或聊天 · 9:00–23:00",
+        sosLi1: "与可信成人交谈（辅导员、老师、家长…）",
+        sosLi2: "立即危险 → 119（儿童保护，法国）",
+        sosLi3: "保留证据（截图、日期）",
+        sosClose: "关闭",
+        exitMsg: "离开前：若需要帮助，<strong>3018</strong> 免费且匿名。",
+        exitGo: "查看帮助",
+        exitDismiss: "好的",
+        titleEssentiel: "要点",
+        subEssentiel: "三件要知道的事",
+        titleMythes: "10秒破解迷思",
+        subMythes: "点击卡片翻转",
+        titleQuiz: "测验",
+        subQuiz: "7个情境 · 你的反应很重要",
+        titleAgir: "该怎么做？",
+        subAgir: "根据你的角色",
+        titleCheck: "清单",
+        subCheck: "勾选你已经做到的",
+        titleAide: "立即帮助",
+        subAide: "你从不孤单",
+        titleEngage: "承诺",
+        subEngage: "一个简单的行动",
+        scoreLabel: "得分",
+        btnNext: "下一题 →",
+        quizDone: "测验完成",
+        quizEndGood: "反应很好。你已经知道如何行动。",
+        quizEndOk: "不错。记住这些要点。",
+        quizEndLow: "重要的是你学到了正确的反应。",
+        quizTip1: "私下支持 + 向成人报告",
+        quizTip2: "保留证据（截图、日期）",
+        quizTip3: "需要时联系 3018",
+        quizTip4: "不要传播或助长冲突",
+        quizGo3018: "前往 3018.fr",
+        quizRestart: "重新开始",
+        card1Title: "欺凌",
+        card1Text: "反复且故意的行为：侮辱、排斥、谣言、殴打… 使人孤立并受伤。",
+        card2Title: "网络欺凌",
+        card2Text: "线上同样如此。消息、照片、谣言。与校园里一样严重。",
+        card3Title: "健康",
+        card3Text: "焦虑、睡眠、自信、孤立。欺凌直接影响心理健康。",
+        calloutText: "免费统一号码 · 匿名 · 每周7天 9:00–23:00",
+        mythLabel: "迷思",
+        realLabel: "现实",
+        flipHint: "点击翻转",
+        myth1: "「只是开玩笑」",
+        myth1Real: "重复和伤害意图会把玩笑变成欺凌。",
+        myth1P: "对一个人有趣的，可能毁掉另一个人。",
+        myth2: "「忽略就好」",
+        myth2Real: "忽略并不总能让欺凌停止。",
+        myth2P: "没有反应可能鼓励继续。",
+        myth3: "「网络欺凌不是真的」",
+        myth3Real: "影响非常具体：焦虑、孤立、睡眠问题。",
+        myth3P: "屏幕上的文字同样伤人。",
+        myth4: "「说出来会更糟」",
+        myth4Real: "多数情况下，说出来能迅速采取行动。",
+        myth4P: "沉默主要保护的是欺凌者。",
+        tabV: "受害者",
+        tabT: "旁观者",
+        tabA: "实施者",
+        panelVTitle: "你是受害者",
+        panelVIntro: "这不是你的责任。你有权得到保护。",
+        panelV1: "与可信成人交谈（辅导员、老师、家长、护士…）",
+        panelV2: "保留证据：截图、消息、日期",
+        panelV3: "联系 <strong>3018</strong>（免费、匿名）",
+        panelV4: "不要独自回应挑衅",
+        panelTTitle: "你是旁观者",
+        panelTIntro: "你的沉默可能被感受为对欺凌者的支持。",
+        panelT1: "悄悄支持（消息、陪伴）",
+        panelT2: "绝不参与嘲笑或转发",
+        panelT3: "向成人或 3018 报告",
+        panelT4: "线上：举报内容 + 3018",
+        panelATitle: "你实施过欺凌",
+        panelAIntro: "停止是一种勇气。",
+        panelA1: "立即停止",
+        panelA2: "支持对方，而不是为自己辩解",
+        panelA3: "需要时与成人交谈",
+        panelA4: "改变是可能的",
+        check1: "我知道 3018",
+        check2: "我知道在学校可以找谁谈",
+        check3: "我从不点赞/分享羞辱内容",
+        check4: "看到情况我会行动",
+        check5: "我的账号是私密模式",
+        checkDone: "清单完成。你有正确的反应。",
+        res3018Title: "统一号码",
+        res3018Text: "欺凌与网络欺凌。免费、匿名。9:00–23:00。",
+        res119Title: "儿童保护",
+        res119Text: "若你处于危险中。免费，全天24小时。",
+        resPhareTitle: "反欺凌项目",
+        resPhareText: "学校官方机制：资源团队、协议、预防。",
+        resAppTitle: "3018 应用",
+        resAppText: "私密聊天与快速举报。",
+        resMore: "了解更多 →",
+        resDl: "下载 →",
+        pledgeTitle: "我承诺",
+        pledgeText: "绝不参与欺凌，支持受害者，负责任地使用网络。",
+        pledgeLabel: "我承诺尊重他人，无论线上还是线下。",
+        pledgeBtn: "确认",
+        pledgeOk: "谢谢。你的承诺很重要。",
+        footerTheme: "第10届世界法语高中周 · 2026年11月23–28日",
+        footerSlogan: "「促进、预防、陪伴：一起为我们的健康行动！」",
+        footerNote: "教育宣传工具。若有困扰 → 3018 或可信成人。",
+        skipLink: "跳到测验"
+      },
+      th: {
+        navHelp: "ต้องการความช่วยเหลือ →",
+        tag: "สัปดาห์ LFM · 23–28 พ.ย. 2026",
+        heroTitle: "ป้องกันการกลั่นแกล้ง<br><span>ปกป้องสุขภาพของเรา</span>",
+        heroSub: "รับรู้ ตอบสนอง สนับสนุน ในกรอบ « ส่งเสริม ป้องกัน ดูแล »",
+        btnQuiz: "เริ่มแบบทดสอบ",
+        btnAct: "ควรทำอย่างไร?",
+        statViews: "ยอดวันนี้",
+        statPledges: "คำมั่น",
+        statQuiz: "ทำแบบทดสอบแล้ว",
+        sosBtn: "ฉุกเฉิน",
+        sosTitle: "คุณต้องการความช่วยเหลือตอนนี้",
+        sosText: "คุณไม่ได้อยู่คนเดียว ติดต่อ 3018 (ฟรี ไม่ระบุตัวตน) หรือผู้ใหญ่ที่ไว้ใจได้",
+        sosSmall: "โทรหรือแชท · 9:00–23:00",
+        sosLi1: "พูดกับผู้ใหญ่ที่ไว้ใจได้ (ที่ปรึกษา ครู ผู้ปกครอง…)",
+        sosLi2: "อันตรายทันที → 119 (คุ้มครองเด็ก ฝรั่งเศส)",
+        sosLi3: "เก็บหลักฐาน (ภาพหน้าจอ วันที่)",
+        sosClose: "ปิด",
+        exitMsg: "ก่อนไป: <strong>3018</strong> ฟรีและไม่ระบุตัวตนหากต้องการความช่วยเหลือ",
+        exitGo: "ดูความช่วยเหลือ",
+        exitDismiss: "ตกลง",
+        titleEssentiel: "สิ่งสำคัญ",
+        subEssentiel: "สามอย่างที่ควรรู้",
+        titleMythes: "ตำนานใน 10 วินาที",
+        subMythes: "แตะการ์ดเพื่อพลิก",
+        titleQuiz: "แบบทดสอบ",
+        subQuiz: "7 สถานการณ์ · ปฏิกิริยาของคุณสำคัญ",
+        titleAgir: "ควรทำอย่างไร?",
+        subAgir: "ตามบทบาทของคุณ",
+        titleCheck: "รายการตรวจสอบ",
+        subCheck: "ทำเครื่องหมายสิ่งที่คุณทำอยู่แล้ว",
+        titleAide: "ความช่วยเหลือทันที",
+        subAide: "คุณไม่เคยอยู่คนเดียว",
+        titleEngage: "คำมั่น",
+        subEngage: "ก้าวง่าย ๆ",
+        scoreLabel: "คะแนน",
+        btnNext: "ถัดไป →",
+        quizDone: "ทำแบบทดสอบเสร็จแล้ว",
+        quizEndGood: "ปฏิกิริยาดีมาก คุณรู้แล้วว่าต้องทำอย่างไร",
+        quizEndOk: "ดี จำประเด็นสำคัญเหล่านี้ไว้",
+        quizEndLow: "สิ่งสำคัญคือคุณได้เรียนรู้ปฏิกิริยาที่ถูกต้อง",
+        quizTip1: "สนับสนุนแบบส่วนตัว + แจ้งผู้ใหญ่",
+        quizTip2: "เก็บหลักฐาน (ภาพหน้าจอ วันที่)",
+        quizTip3: "ติดต่อ 3018 หากจำเป็น",
+        quizTip4: "อย่าแพร่หรือเติมเชื้อความขัดแย้ง",
+        quizGo3018: "ไปที่ 3018.fr",
+        quizRestart: "เริ่มใหม่",
+        card1Title: "การกลั่นแกล้ง",
+        card1Text: "การกระทำซ้ำ ๆ และจงใจ: ด่าทอ กีดกัน ข่าวลือ ตี… ทำให้โดดเดี่ยวและเจ็บปวด",
+        card2Title: "การกลั่นแกล้งออนไลน์",
+        card2Text: "สิ่งเดียวกันบนเน็ต ข้อความ รูปภาพ ข่าวลือ สำคัญเท่ากับในโรงเรียน",
+        card3Title: "สุขภาพ",
+        card3Text: "ความวิตก กิน นอน มั่นใจ โดดเดี่ยว การกลั่นแกล้งกระทบสุขภาพจิตโดยตรง",
+        calloutText: "หมายเลขฟรีเดียว · ไม่ระบุตัวตน · ทุกวัน 9:00–23:00",
+        mythLabel: "ตำนาน",
+        realLabel: "ความจริง",
+        flipHint: "แตะเพื่อพลิก",
+        myth1: "« แค่ล้อเล่น »",
+        myth1Real: "การซ้ำและเจตนาทำร้ายเปลี่ยนเรื่องตลกเป็นการกลั่นแกล้ง",
+        myth1P: "สิ่งที่ตลกสำหรับคนหนึ่งอาจทำลายอีกคน",
+        myth2: "« แค่เพิกเฉยก็พอ »",
+        myth2Real: "การเพิกเฉยไม่ได้หยุดการกลั่นแกล้งเสมอไป",
+        myth2P: "การไม่ตอบสนองอาจส่งเสริมให้ทำต่อ",
+        myth3: "« การกลั่นแกล้งออนไลน์ไม่จริง »",
+        myth3Real: "ผลกระทบชัดเจนมาก: วิตก โดดเดี่ยว นอนไม่หลับ",
+        myth3P: "คำบนหน้าจอเจ็บเท่ากัน",
+        myth4: "« ถ้าพูดออกไปจะแย่ลง »",
+        myth4Real: "ในกรณีส่วนใหญ่ การพูดช่วยให้ลงมือเร็ว",
+        myth4P: "ความเงียบปกป้องผู้กลั่นแกล้งเป็นหลัก",
+        tabV: "ผู้ถูกรังแก",
+        tabT: "ผู้เห็นเหตุการณ์",
+        tabA: "ผู้กระทำ",
+        panelVTitle: "คุณเป็นผู้ถูกรังแก",
+        panelVIntro: "นี่ไม่ใช่ความผิดของคุณ คุณมีสิทธิ์ได้รับการปกป้อง",
+        panelV1: "พูดกับผู้ใหญ่ที่ไว้ใจได้ (ที่ปรึกษา ครู ผู้ปกครอง พยาบาล…)",
+        panelV2: "เก็บหลักฐาน: ภาพหน้าจอ ข้อความ วันที่",
+        panelV3: "ติดต่อ <strong>3018</strong> (ฟรี ไม่ระบุตัวตน)",
+        panelV4: "อย่าตอบโต้การยั่วยุคนเดียว",
+        panelTTitle: "คุณเป็นผู้เห็นเหตุการณ์",
+        panelTIntro: "ความเงียบของคุณอาจถูกมองว่าสนับสนุนผู้กลั่นแกล้ง",
+        panelT1: "สนับสนุนอย่างเงียบ ๆ (ข้อความ การอยู่ด้วย)",
+        panelT2: "อย่าเข้าร่วมการเยาะเย้ยหรือแชร์",
+        panelT3: "แจ้งผู้ใหญ่หรือ 3018",
+        panelT4: "ออนไลน์: รายงานเนื้อหา + 3018",
+        panelATitle: "คุณเคยกลั่นแกล้ง",
+        panelAIntro: "การหยุดเป็นความกล้าหาญ",
+        panelA1: "หยุดทันที",
+        panelA2: "สนับสนุนคนนั้นมากกว่าแก้ตัว",
+        panelA3: "พูดกับผู้ใหญ่ถ้าต้องการความช่วยเหลือ",
+        panelA4: "การเปลี่ยนแปลงเป็นไปได้",
+        check1: "ฉันรู้จัก 3018",
+        check2: "ฉันรู้ว่าจะพูดกับใครในโรงเรียน",
+        check3: "ฉันไม่เคยไลก์/แชร์เนื้อหาที่ทำให้ขายหน้า",
+        check4: "ถ้าเห็นสถานการณ์ ฉันลงมือ",
+        check5: "บัญชีของฉันเป็นแบบส่วนตัว",
+        checkDone: "รายการครบแล้ว คุณมีปฏิกิริยาที่ถูกต้อง",
+        res3018Title: "หมายเลขเดียว",
+        res3018Text: "กลั่นแกล้งและออนไลน์ ฟรี ไม่ระบุตัวตน 9:00–23:00",
+        res119Title: "เด็กตกอยู่ในอันตราย",
+        res119Text: "หากคุณตกอยู่ในอันตราย ฟรี ตลอด 24 ชม.",
+        resPhareTitle: "โปรแกรมต่อต้านการกลั่นแกล้ง",
+        resPhareText: "ระบบอย่างเป็นทางการของโรงเรียน: ทีมทรัพยากร โปรโตคอล การป้องกัน",
+        resAppTitle: "แอป 3018",
+        resAppText: "แชทเงียบและรายงานเร็ว",
+        resMore: "ดูเพิ่มเติม →",
+        resDl: "ดาวน์โหลด →",
+        pledgeTitle: "ฉันขอสัญญา",
+        pledgeText: "จะไม่เข้าร่วมการกลั่นแกล้ง สนับสนุนผู้ถูกรังแก และใช้โซเชียลอย่างรับผิดชอบ",
+        pledgeLabel: "ฉันสัญญาว่าจะเคารพผู้อื่น ทั้งออฟไลน์และออนไลน์",
+        pledgeBtn: "ยืนยัน",
+        pledgeOk: "ขอบคุณ คำมั่นของคุณสำคัญ",
+        footerTheme: "สัปดาห์ที่ 10 ของโรงเรียนมัธยมฝรั่งเศสทั่วโลก · 23–28 พ.ย. 2026",
+        footerSlogan: "« ส่งเสริม ป้องกัน ดูแล: ร่วมมือกันเพื่อสุขภาพของเรา! »",
+        footerNote: "เครื่องมือสร้างความตระหนักด้านการศึกษา หากทุกข์ใจ → 3018 หรือผู้ใหญ่ที่ไว้ใจได้",
+        skipLink: "ไปที่แบบทดสอบ"
+      },
+      es: {
+        navHelp: "Necesitas ayuda →",
+        tag: "Semana LFM · 23–28 noviembre 2026",
+        heroTitle: "Prevenir el acoso,<br><span>proteger nuestra salud</span>",
+        heroSub: "Reconocer. Reaccionar. Apoyar. En el marco de « Promover, prevenir, acompañar ».",
+        btnQuiz: "Lanzar el quiz",
+        btnAct: "¿Qué hacer?",
+        statViews: "visitas hoy",
+        statPledges: "compromisos",
+        statQuiz: "quizzes hechos",
+        sosBtn: "Urgencia",
+        sosTitle: "Necesitas ayuda ahora",
+        sosText: "No estás solo/a. Contacta el 3018 (gratis, anónimo) o un adulto de confianza.",
+        sosSmall: "Llamar o chatear · 9h–23h",
+        sosLi1: "Habla con un adulto de confianza (consejero, profe, padre…)",
+        sosLi2: "Peligro inmediato → 119 (protección de la infancia)",
+        sosLi3: "Guarda las pruebas (capturas, fechas)",
+        sosClose: "Cerrar",
+        exitMsg: "Antes de irte: el <strong>3018</strong> es gratis y anónimo si necesitas ayuda.",
+        exitGo: "Ver la ayuda",
+        exitDismiss: "OK",
+        titleEssentiel: "Lo esencial",
+        subEssentiel: "Tres cosas que saber",
+        titleMythes: "Mitos en 10 segundos",
+        subMythes: "Toca una tarjeta para voltearla",
+        titleQuiz: "Quiz",
+        subQuiz: "7 situaciones · tus reflejos cuentan",
+        titleAgir: "¿Qué hacer?",
+        subAgir: "Según tu lugar",
+        titleCheck: "Lista de verificación",
+        subCheck: "Marca lo que ya aplicas",
+        titleAide: "Ayuda inmediata",
+        subAide: "Nunca estás solo/a",
+        titleEngage: "Compromiso",
+        subEngage: "Un gesto simple",
+        scoreLabel: "Puntuación",
+        btnNext: "Siguiente →",
+        quizDone: "Quiz terminado",
+        quizEndGood: "Muy buenos reflejos. Ya sabes cómo actuar.",
+        quizEndOk: "Bien. Aquí los puntos esenciales a retener.",
+        quizEndLow: "Lo importante es haber aprendido los buenos reflejos.",
+        quizTip1: "Apoyar en privado + avisar a un adulto",
+        quizTip2: "Guardar pruebas (capturas, fechas)",
+        quizTip3: "Contactar el 3018 si hace falta",
+        quizTip4: "No difundir ni alimentar el conflicto",
+        quizGo3018: "Ir a 3018.fr",
+        quizRestart: "Recomenzar",
+        card1Title: "Acoso",
+        card1Text: "Actos repetidos e intencionales: insultos, exclusión, rumores, golpes… que aíslan y hieren.",
+        card2Title: "Ciberacoso",
+        card2Text: "Lo mismo en línea. Mensajes, fotos, rumores. Cuenta tanto como en el patio.",
+        card3Title: "Salud",
+        card3Text: "Ansiedad, sueño, confianza, aislamiento. El acoso afecta directamente la salud mental.",
+        calloutText: "Número único gratuito · anónimo · 7 días de 9h a 23h",
+        mythLabel: "Mito",
+        realLabel: "Realidad",
+        flipHint: "Toca para voltear",
+        myth1: "« Es solo una broma »",
+        myth1Real: "La repetición y la intención de dañar convierten una broma en acoso.",
+        myth1P: "Lo que es gracioso para uno puede destruir a otro.",
+        myth2: "« Basta con ignorar »",
+        myth2Real: "Ignorar no siempre hace cesar el acoso.",
+        myth2P: "La falta de reacción puede animar a continuar.",
+        myth3: "« El ciberacoso no es real »",
+        myth3Real: "Los efectos son muy concretos: ansiedad, aislamiento, sueño.",
+        myth3P: "Las palabras en una pantalla hieren igual.",
+        myth4: "« Si hablo, va a empeorar »",
+        myth4Real: "En la mayoría de los casos, hablar permite actuar rápido.",
+        myth4P: "El silencio protege sobre todo a los acosadores.",
+        tabV: "Víctima",
+        tabT: "Testigo",
+        tabA: "Autor",
+        panelVTitle: "Eres víctima",
+        panelVIntro: "No eres responsable. Tienes derecho a ser protegido/a.",
+        panelV1: "Habla con un adulto de confianza (consejero, profe, padre, enfermera…)",
+        panelV2: "Guarda las pruebas: capturas, mensajes, fechas",
+        panelV3: "Contacta el <strong>3018</strong> (gratis, anónimo)",
+        panelV4: "No respondas solo/a a las provocaciones",
+        panelTTitle: "Eres testigo",
+        panelTIntro: "Tu silencio puede vivirse como apoyo a los acosadores.",
+        panelT1: "Apoya discretamente (mensaje, presencia)",
+        panelT2: "Nunca te unas a las burlas o a los compartidos",
+        panelT3: "Avisa a un adulto o al 3018",
+        panelT4: "En línea: denuncia el contenido + 3018",
+        panelATitle: "Has acosado",
+        panelAIntro: "Parar es un acto de valor.",
+        panelA1: "Para inmediatamente",
+        panelA2: "Apoya a la persona en lugar de justificarte",
+        panelA3: "Habla con un adulto si necesitas ayuda",
+        panelA4: "Cambiar es posible",
+        check1: "Conozco el 3018",
+        check2: "Sé a quién hablar en mi centro",
+        check3: "Nunca doy like / comparto contenidos humillantes",
+        check4: "Si veo una situación, actúo",
+        check5: "Mis cuentas están en modo privado",
+        checkDone: "Lista completa. Tienes los buenos reflejos.",
+        res3018Title: "Número único",
+        res3018Text: "Acoso y ciber. Gratis, anónimo. 9h-23h.",
+        res119Title: "Infancia en peligro",
+        res119Text: "Si estás en peligro. Gratis, 24h/24.",
+        resPhareTitle: "Programa antiacoso",
+        resPhareText: "Dispositivo oficial de tu centro: equipo recurso, protocolos, prevención.",
+        resAppTitle: "Aplicación 3018",
+        resAppText: "Chat discreto y denuncia rápida.",
+        resMore: "Saber más →",
+        resDl: "Descargar →",
+        pledgeTitle: "Me comprometo",
+        pledgeText: "A no participar nunca en el acoso, a apoyar a las víctimas y a usar las redes de forma responsable.",
+        pledgeLabel: "Me comprometo a respetar a los demás, en presencial y en línea.",
+        pledgeBtn: "Validar",
+        pledgeOk: "Gracias. Tu compromiso cuenta.",
+        footerTheme: "10.ª Semana de los liceos franceses del mundo · 23-28 nov. 2026",
+        footerSlogan: "« Promover, prevenir, acompañar: ¡actuemos juntos por nuestra salud! »",
+        footerNote: "Herramienta pedagógica de sensibilización. En caso de angustia → 3018 o un adulto de confianza.",
+        skipLink: "Ir al quiz"
+      },
+      pt: {
+        navHelp: "Precisas de ajuda →",
+        tag: "Semana LFM · 23–28 novembro 2026",
+        heroTitle: "Prevenir o bullying,<br><span>proteger a nossa saúde</span>",
+        heroSub: "Reconhecer. Reagir. Apoiar. No quadro de « Promover, prevenir, acompanhar ».",
+        btnQuiz: "Iniciar o quiz",
+        btnAct: "O que fazer?",
+        statViews: "visitas hoje",
+        statPledges: "compromissos",
+        statQuiz: "quizzes feitos",
+        sosBtn: "Emergência",
+        sosTitle: "Precisas de ajuda agora",
+        sosText: "Não estás sozinho/a. Contacta o 3018 (grátis, anónimo) ou um adulto de confiança.",
+        sosSmall: "Ligar ou conversar · 9h–23h",
+        sosLi1: "Fala com um adulto de confiança (conselheiro, prof, pai…)",
+        sosLi2: "Perigo imediato → 119 (proteção da infância)",
+        sosLi3: "Guarda as provas (capturas, datas)",
+        sosClose: "Fechar",
+        exitMsg: "Antes de saíres: o <strong>3018</strong> é grátis e anónimo se precisares de ajuda.",
+        exitGo: "Ver a ajuda",
+        exitDismiss: "OK",
+        titleEssentiel: "O essencial",
+        subEssentiel: "Três coisas a saber",
+        titleMythes: "Mitos em 10 segundos",
+        subMythes: "Toca num cartão para o virar",
+        titleQuiz: "Quiz",
+        subQuiz: "7 situações · os teus reflexos contam",
+        titleAgir: "O que fazer?",
+        subAgir: "Segundo o teu lugar",
+        titleCheck: "Lista de verificação",
+        subCheck: "Marca o que já aplicas",
+        titleAide: "Ajuda imediata",
+        subAide: "Nunca estás sozinho/a",
+        titleEngage: "Compromisso",
+        subEngage: "Um gesto simples",
+        scoreLabel: "Pontuação",
+        btnNext: "Seguinte →",
+        quizDone: "Quiz terminado",
+        quizEndGood: "Muito bons reflexos. Já sabes como agir.",
+        quizEndOk: "Bem. Aqui os pontos essenciais a reter.",
+        quizEndLow: "O importante é teres aprendido os bons reflexos.",
+        quizTip1: "Apoiar em privado + avisar um adulto",
+        quizTip2: "Guardar provas (capturas, datas)",
+        quizTip3: "Contactar o 3018 se precisares",
+        quizTip4: "Não difundir nem alimentar o conflito",
+        quizGo3018: "Ir a 3018.fr",
+        quizRestart: "Recomeçar",
+        card1Title: "Bullying",
+        card1Text: "Atos repetidos e intencionais: insultos, exclusão, rumores, pancadas… que isolam e ferem.",
+        card2Title: "Ciberbullying",
+        card2Text: "A mesma coisa online. Mensagens, fotos, rumores. Conta tanto como no recreio.",
+        card3Title: "Saúde",
+        card3Text: "Ansiedade, sono, confiança, isolamento. O bullying afeta diretamente a saúde mental.",
+        calloutText: "Número único gratuito · anónimo · 7 dias das 9h às 23h",
+        mythLabel: "Mito",
+        realLabel: "Realidade",
+        flipHint: "Toca para virar",
+        myth1: "« É só uma brincadeira »",
+        myth1Real: "A repetição e a intenção de prejudicar transformam uma brincadeira em bullying.",
+        myth1P: "O que é engraçado para um pode destruir outro.",
+        myth2: "« Basta ignorar »",
+        myth2Real: "Ignorar nem sempre faz parar o bullying.",
+        myth2P: "A falta de reação pode encorajar a continuar.",
+        myth3: "« O ciberbullying não é real »",
+        myth3Real: "Os efeitos são muito concretos: ansiedade, isolamento, sono.",
+        myth3P: "As palavras num ecrã ferem igual.",
+        myth4: "« Se falar, vai piorar »",
+        myth4Real: "Na maioria dos casos, falar permite agir rapidamente.",
+        myth4P: "O silêncio protege sobretudo os agressores.",
+        tabV: "Vítima",
+        tabT: "Testemunha",
+        tabA: "Autor",
+        panelVTitle: "És vítima",
+        panelVIntro: "Não és responsável. Tens o direito de ser protegido/a.",
+        panelV1: "Fala com um adulto de confiança (conselheiro, prof, pai, enfermeira…)",
+        panelV2: "Guarda as provas: capturas, mensagens, datas",
+        panelV3: "Contacta o <strong>3018</strong> (grátis, anónimo)",
+        panelV4: "Não respondas sozinho/a às provocações",
+        panelTTitle: "És testemunha",
+        panelTIntro: "O teu silêncio pode ser sentido como apoio aos agressores.",
+        panelT1: "Apoia discretamente (mensagem, presença)",
+        panelT2: "Nunca te juntes às gozas ou às partilhas",
+        panelT3: "Avisa um adulto ou o 3018",
+        panelT4: "Online: denuncia o conteúdo + 3018",
+        panelATitle: "Agressiste",
+        panelAIntro: "Parar é um ato de coragem.",
+        panelA1: "Para imediatamente",
+        panelA2: "Apoia a pessoa em vez de te justificares",
+        panelA3: "Fala com um adulto se precisares de ajuda",
+        panelA4: "Mudar é possível",
+        check1: "Conheço o 3018",
+        check2: "Sei a quem falar no meu estabelecimento",
+        check3: "Nunca gosto / partilho conteúdos humilhantes",
+        check4: "Se vejo uma situação, ajo",
+        check5: "As minhas contas estão em modo privado",
+        checkDone: "Lista completa. Tens os bons reflexos.",
+        res3018Title: "Número único",
+        res3018Text: "Bullying e ciber. Grátis, anónimo. 9h-23h.",
+        res119Title: "Infância em perigo",
+        res119Text: "Se estás em perigo. Grátis, 24h/24.",
+        resPhareTitle: "Programa anti-bullying",
+        resPhareText: "Dispositivo oficial do teu estabelecimento: equipa recurso, protocolos, prevenção.",
+        resAppTitle: "Aplicação 3018",
+        resAppText: "Chat discreto e denúncia rápida.",
+        resMore: "Saber mais →",
+        resDl: "Descarregar →",
+        pledgeTitle: "Comprometo-me",
+        pledgeText: "A nunca participar no bullying, a apoiar as vítimas e a usar as redes de forma responsável.",
+        pledgeLabel: "Comprometo-me a respeitar os outros, presencialmente e online.",
+        pledgeBtn: "Validar",
+        pledgeOk: "Obrigado. O teu compromisso conta.",
+        footerTheme: "10.ª Semana dos liceus franceses do mundo · 23-28 nov. 2026",
+        footerSlogan: "« Promover, prevenir, acompanhar: ajamos juntos pela nossa saúde! »",
+        footerNote: "Ferramenta pedagógica de sensibilização. Em caso de angústia → 3018 ou um adulto de confiança.",
+        skipLink: "Ir ao quiz"
+      },
+      ar: {
+        navHelp: "تحتاج مساعدة ←",
+        tag: "أسبوع LFM · 23–28 نوفمبر 2026",
+        heroTitle: "الوقاية من التنمر،<br><span>حماية صحتنا</span>",
+        heroSub: "التعرّف. الرد. الدعم. في إطار « تعزيز، وقاية، مرافقة ».",
+        btnQuiz: "ابدأ الاختبار",
+        btnAct: "ماذا أفعل؟",
+        statViews: "زيارات اليوم",
+        statPledges: "التزامات",
+        statQuiz: "اختبارات منجزة",
+        sosBtn: "طوارئ",
+        sosTitle: "تحتاج مساعدة الآن",
+        sosText: "لست وحدك. اتصل بـ 3018 (مجاني، مجهول) أو بشخص بالغ تثق به.",
+        sosSmall: "اتصال أو دردشة · 9ص–11م",
+        sosLi1: "تحدث مع شخص بالغ تثق به (مستشار، أستاذ، والد…)",
+        sosLi2: "خطر فوري ← 119 (حماية الطفولة)",
+        sosLi3: "احتفظ بالأدلة (لقطات، تواريخ)",
+        sosClose: "إغلاق",
+        exitMsg: "قبل المغادرة: <strong>3018</strong> مجاني ومجهول إذا احتجت مساعدة.",
+        exitGo: "عرض المساعدة",
+        exitDismiss: "حسنًا",
+        titleEssentiel: "الأساسيات",
+        subEssentiel: "ثلاثة أشياء يجب معرفتها",
+        titleMythes: "أساطير في 10 ثوانٍ",
+        subMythes: "انقر على بطاقة لقلبها",
+        titleQuiz: "اختبار",
+        subQuiz: "7 مواقف · ردود فعلك مهمة",
+        titleAgir: "ماذا أفعل؟",
+        subAgir: "حسب دورك",
+        titleCheck: "قائمة التحقق",
+        subCheck: "ضع علامة على ما تطبقه بالفعل",
+        titleAide: "مساعدة فورية",
+        subAide: "لست وحدك أبدًا",
+        titleEngage: "التزام",
+        subEngage: "خطوة بسيطة",
+        scoreLabel: "النتيجة",
+        btnNext: "التالي ←",
+        quizDone: "انتهى الاختبار",
+        quizEndGood: "ردود فعل ممتازة. تعرف بالفعل كيف تتصرف.",
+        quizEndOk: "جيد. إليك النقاط الأساسية للتذكر.",
+        quizEndLow: "المهم أنك تعلمت الردود الصحيحة.",
+        quizTip1: "الدعم بشكل خاص + إبلاغ شخص بالغ",
+        quizTip2: "الاحتفاظ بالأدلة (لقطات، تواريخ)",
+        quizTip3: "الاتصال بـ 3018 عند الحاجة",
+        quizTip4: "عدم نشر الصراع أو تغذيته",
+        quizGo3018: "الذهاب إلى 3018.fr",
+        quizRestart: "إعادة البدء",
+        card1Title: "التنمر",
+        card1Text: "أفعال متكررة ومتعمدة: إهانات، إقصاء، شائعات، ضرب… تعزل وتجرح.",
+        card2Title: "التنمر الإلكتروني",
+        card2Text: "نفس الشيء عبر الإنترنت. رسائل، صور، شائعات. له نفس أهمية الساحة.",
+        card3Title: "الصحة",
+        card3Text: "قلق، نوم، ثقة، عزلة. التنمر يؤثر مباشرة على الصحة النفسية.",
+        calloutText: "رقم مجاني موحد · مجهول · 7 أيام من 9ص إلى 11م",
+        mythLabel: "أسطورة",
+        realLabel: "واقع",
+        flipHint: "انقر للقلب",
+        myth1: "« مجرد مزحة »",
+        myth1Real: "التكرار ونية الإيذاء تحولان المزحة إلى تنمر.",
+        myth1P: "ما هو مضحك لشخص قد يدمر آخر.",
+        myth2: "« يكفي التجاهل »",
+        myth2Real: "التجاهل لا يوقف التنمر دائمًا.",
+        myth2P: "غياب الرد قد يشجع على الاستمرار.",
+        myth3: "« التنمر الإلكتروني ليس حقيقيًا »",
+        myth3Real: "الآثار ملموسة جدًا: قلق، عزلة، نوم.",
+        myth3P: "الكلمات على الشاشة تجرح بنفس القدر.",
+        myth4: "« إذا تكلمت سيزداد الأمر سوءًا »",
+        myth4Real: "في معظم الحالات، الكلام يسمح بالتصرف بسرعة.",
+        myth4P: "الصمت يحمي المتنمرين بشكل أساسي.",
+        tabV: "ضحية",
+        tabT: "شاهد",
+        tabA: "فاعل",
+        panelVTitle: "أنت ضحية",
+        panelVIntro: "لست مسؤولاً. لديك الحق في الحماية.",
+        panelV1: "تحدث مع شخص بالغ تثق به (مستشار، أستاذ، والد، ممرضة…)",
+        panelV2: "احتفظ بالأدلة: لقطات، رسائل، تواريخ",
+        panelV3: "اتصل بـ <strong>3018</strong> (مجاني، مجهول)",
+        panelV4: "لا ترد وحدك على الاستفزازات",
+        panelTTitle: "أنت شاهد",
+        panelTIntro: "صمتك قد يُشعر كدعم للمتنمرين.",
+        panelT1: "ادعم بهدوء (رسالة، حضور)",
+        panelT2: "لا تنضم أبدًا إلى السخرية أو المشاركات",
+        panelT3: "أبلغ شخصًا بالغًا أو 3018",
+        panelT4: "عبر الإنترنت: أبلغ عن المحتوى + 3018",
+        panelATitle: "لقد تنمّرت",
+        panelAIntro: "التوقف فعل شجاعة.",
+        panelA1: "توقف فورًا",
+        panelA2: "ادعم الشخص بدل تبرير نفسك",
+        panelA3: "تحدث مع شخص بالغ إن احتجت مساعدة",
+        panelA4: "التغيير ممكن",
+        check1: "أعرف رقم 3018",
+        check2: "أعرف من أتحدث إليه في مدرستي",
+        check3: "لا أعجب / أشارك أبدًا محتويات مهينة",
+        check4: "إذا رأيت موقفًا، أتصرف",
+        check5: "حساباتي في الوضع الخاص",
+        checkDone: "القائمة مكتملة. لديك الردود الصحيحة.",
+        res3018Title: "الرقم الموحد",
+        res3018Text: "تنمر وإلكتروني. مجاني، مجهول. 9ص–11م.",
+        res119Title: "طفولة في خطر",
+        res119Text: "إذا كنت في خطر. مجاني، 24/24.",
+        resPhareTitle: "برنامج مكافحة التنمر",
+        resPhareText: "جهاز رسمي في مؤسستك: فريق موارد، بروتوكولات، وقاية.",
+        resAppTitle: "تطبيق 3018",
+        resAppText: "دردشة هادئة وإبلاغ سريع.",
+        resMore: "معرفة المزيد ←",
+        resDl: "تحميل ←",
+        pledgeTitle: "ألتزم",
+        pledgeText: "بعدم المشاركة أبدًا في التنمر، ودعم الضحايا، واستخدام الشبكات بمسؤولية.",
+        pledgeLabel: "ألتزم باحترام الآخرين، حضورًا وعبر الإنترنت.",
+        pledgeBtn: "تأكيد",
+        pledgeOk: "شكرًا. التزامك مهم.",
+        footerTheme: "الأسبوع العاشر لثانويات فرنسا في العالم · 23–28 نوفمبر 2026",
+        footerSlogan: "« تعزيز، وقاية، مرافقة: لنعمل معًا من أجل صحتنا! »",
+        footerNote: "أداة توعية تربوية. في حالة الضيق ← 3018 أو شخص بالغ تثق به.",
+        skipLink: "الانتقال إلى الاختبار"
+      }
+    };
+    let currentLang = "fr";
+
+    function updateContent(lang) {
+      const t = I18N[lang] || I18N.fr;
+
+      // Essentiel cards
+      const cards = document.querySelectorAll('[data-section="essentiel"] .card');
+      if (cards[0]) {
+        cards[0].querySelector('h3').textContent = t.card1Title;
+        cards[0].querySelector('p').textContent = t.card1Text;
+      }
+      if (cards[1]) {
+        cards[1].querySelector('h3').textContent = t.card2Title;
+        cards[1].querySelector('p').textContent = t.card2Text;
+      }
+      if (cards[2]) {
+        cards[2].querySelector('h3').textContent = t.card3Title;
+        cards[2].querySelector('p').textContent = t.card3Text;
+      }
+      const calloutP = document.querySelector('[data-section="essentiel"] .callout p');
+      if (calloutP) calloutP.textContent = t.calloutText;
+
+      // Myths
+      const flips = document.querySelectorAll('.flip');
+      const myths = [
+        { m: t.myth1, r: t.myth1Real, p: t.myth1P },
+        { m: t.myth2, r: t.myth2Real, p: t.myth2P },
+        { m: t.myth3, r: t.myth3Real, p: t.myth3P },
+        { m: t.myth4, r: t.myth4Real, p: t.myth4P }
+      ];
+      flips.forEach((flip, i) => {
+        if (!myths[i]) return;
+        const faces = flip.querySelectorAll('.flip-face');
+        if (faces[0]) {
+          faces[0].querySelector('.flip-label').textContent = t.mythLabel;
+          faces[0].querySelector('h4').textContent = myths[i].m;
+          const hint = faces[0].querySelector('.flip-hint');
+          if (hint) hint.textContent = t.flipHint;
+        }
+        if (faces[1]) {
+          faces[1].querySelector('.flip-label').textContent = t.realLabel;
+          faces[1].querySelector('h4').textContent = myths[i].r;
+          const p = faces[1].querySelector('p');
+          if (p) p.textContent = myths[i].p;
+        }
+      });
+
+      // Agir tabs
+      const tabs = document.querySelectorAll('.tab');
+      if (tabs[0]) tabs[0].textContent = t.tabV;
+      if (tabs[1]) tabs[1].textContent = t.tabT;
+      if (tabs[2]) tabs[2].textContent = t.tabA;
+
+      // Panels
+      const setPanel = (id, title, intro, items) => {
+        const panel = document.getElementById(id);
+        if (!panel) return;
+        const h3 = panel.querySelector('h3');
+        const p = panel.querySelector('p');
+        const lis = panel.querySelectorAll('li');
+        if (h3) h3.textContent = title;
+        if (p) p.textContent = intro;
+        items.forEach((txt, i) => {
+          if (lis[i]) lis[i].innerHTML = txt;
+        });
+      };
+      setPanel('panel-v', t.panelVTitle, t.panelVIntro, [t.panelV1, t.panelV2, t.panelV3, t.panelV4]);
+      setPanel('panel-t', t.panelTTitle, t.panelTIntro, [t.panelT1, t.panelT2, t.panelT3, t.panelT4]);
+      setPanel('panel-a', t.panelATitle, t.panelAIntro, [t.panelA1, t.panelA2, t.panelA3, t.panelA4]);
+
+      // Checklist
+      const checkRows = document.querySelectorAll('.check-row');
+      const checkLabels = [t.check1, t.check2, t.check3, t.check4, t.check5];
+      checkRows.forEach((row, i) => {
+        if (!checkLabels[i]) return;
+        const input = row.querySelector('input');
+        if (!input) return;
+        const checked = input.checked;
+        row.innerHTML = '';
+        row.appendChild(input);
+        row.appendChild(document.createTextNode(' ' + checkLabels[i]));
+        input.checked = checked;
+        input.onchange = updChecks;
+        if (checked) row.classList.add('done');
+        else row.classList.remove('done');
+      });
+      const checkDone = document.getElementById('checkDone');
+      if (checkDone) checkDone.textContent = t.checkDone;
+
+      // Resources
+      const resCards = document.querySelectorAll('.res-card');
+      if (resCards[0]) {
+        resCards[0].querySelector('h3').textContent = t.res3018Title;
+        resCards[0].querySelector('p').textContent = t.res3018Text;
+      }
+      if (resCards[1]) {
+        resCards[1].querySelector('h3').textContent = t.res119Title;
+        resCards[1].querySelector('p').textContent = t.res119Text;
+      }
+      if (resCards[2]) {
+        resCards[2].querySelector('h3').textContent = t.resPhareTitle;
+        resCards[2].querySelector('p').textContent = t.resPhareText;
+        const a = resCards[2].querySelector('a');
+        if (a) a.textContent = t.resMore;
+      }
+      if (resCards[3]) {
+        resCards[3].querySelector('h3').textContent = t.resAppTitle;
+        resCards[3].querySelector('p').textContent = t.resAppText;
+        const a = resCards[3].querySelector('a');
+        if (a) a.textContent = t.resDl;
+      }
+
+      // Pledge
+      const pledge = document.querySelector('.pledge');
+      if (pledge) {
+        const h3 = pledge.querySelector('h3');
+        const intro = pledge.querySelector('p');
+        if (h3) h3.textContent = t.pledgeTitle;
+        if (intro) intro.textContent = t.pledgeText;
+        const labelSpan = pledge.querySelector('label span');
+        if (labelSpan) labelSpan.textContent = t.pledgeLabel;
+        const btn = document.getElementById('pledgeBtn');
+        if (btn) btn.textContent = t.pledgeBtn;
+        const ok = document.getElementById('pledgeOk');
+        if (ok) ok.textContent = t.pledgeOk;
+      }
+
+      // Footer
+      const footerPs = document.querySelectorAll('footer p');
+      if (footerPs[0]) {
+        footerPs[0].innerHTML = `${t.footerTheme}<br>${t.footerSlogan}`;
+      }
+      if (footerPs[1]) footerPs[1].textContent = t.footerNote;
+
+      // Skip link
+      const skip = document.querySelector('.skip-link');
+      if (skip) skip.textContent = t.skipLink;
+
+      // Next button if visible
+      const nextBtn = document.getElementById('nextBtn');
+      if (nextBtn) nextBtn.textContent = t.btnNext;
+    }
+
+    function applyLang(lang) {
+      if (!I18N[lang]) lang = 'fr';
+      currentLang = lang;
+      const t = I18N[lang];
+      const html = document.documentElement;
+      html.lang = lang === 'zh' ? 'zh-Hans' : lang;
+      html.dir = lang === 'ar' ? 'rtl' : 'ltr';
+      document.querySelectorAll("[data-i18n]").forEach(el => {
+        const k = el.getAttribute("data-i18n");
+        if (t[k] != null) el.innerHTML = t[k];
+      });
+      document.querySelectorAll("[data-i18n-html]").forEach(el => {
+        const k = el.getAttribute("data-i18n-html");
+        if (t[k] != null) el.innerHTML = t[k];
+      });
+      // Section titles
+      const titleMap = {
+        essentiel: ["titleEssentiel", "subEssentiel"],
+        mythes: ["titleMythes", "subMythes"],
+        quiz: ["titleQuiz", "subQuiz"],
+        agir: ["titleAgir", "subAgir"],
+        check: ["titleCheck", "subCheck"],
+        aide: ["titleAide", "subAide"],
+        engage: ["titleEngage", "subEngage"]
+      };
+      document.querySelectorAll("[data-section]").forEach(sec => {
+        const name = sec.getAttribute("data-section");
+        const keys = titleMap[name];
+        if (!keys) return;
+        const h = sec.querySelector(".title");
+        const s = sec.querySelector(".sub");
+        if (h && t[keys[0]]) h.textContent = t[keys[0]];
+        if (s && t[keys[1]]) s.textContent = t[keys[1]];
+      });
+      document.querySelectorAll(".lang-btn").forEach(b => {
+        b.classList.toggle("on", b.getAttribute("data-lang") === lang);
+      });
+
+      // Full content update
+      updateContent(lang);
+
+      // Switch quiz language & refresh current question
+      questions = QUESTIONS_BY_LANG[lang] || QUESTIONS_BY_LANG.fr;
+      if (idx < questions.length) {
+        render();
+      }
+
+      try { localStorage.setItem("lfm-lang", lang); } catch (e) {}
+    }
+    document.getElementById("langFr")?.addEventListener("click", () => applyLang("fr"));
+    document.getElementById("langEn")?.addEventListener("click", () => applyLang("en"));
+    document.getElementById("langEs")?.addEventListener("click", () => applyLang("es"));
+    document.getElementById("langPt")?.addEventListener("click", () => applyLang("pt"));
+    document.getElementById("langAr")?.addEventListener("click", () => applyLang("ar"));
+    document.getElementById("langZh")?.addEventListener("click", () => applyLang("zh"));
+    document.getElementById("langTh")?.addEventListener("click", () => applyLang("th"));
+    try {
+      const savedLang = localStorage.getItem("lfm-lang");
+      if (savedLang && I18N[savedLang]) applyLang(savedLang);
+    } catch (e) {}
+
+    // ===== Emergency mode =====
+    (function initSos() {
+      const fab = document.getElementById("sosFab");
+      const overlay = document.getElementById("sosOverlay");
+      const closeBtn = document.getElementById("sosClose");
+      if (!fab || !overlay) return;
+      fab.addEventListener("click", () => {
+        overlay.classList.add("open");
+        document.body.style.overflow = "hidden";
+      });
+      closeBtn?.addEventListener("click", () => {
+        overlay.classList.remove("open");
+        document.body.style.overflow = "";
+      });
+      overlay.addEventListener("click", (e) => {
+        if (e.target === overlay) {
+          overlay.classList.remove("open");
+          document.body.style.overflow = "";
+        }
+      });
+      window.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && overlay.classList.contains("open")) {
+          overlay.classList.remove("open");
+          document.body.style.overflow = "";
+        }
+      });
+    })();
+
+    // ===== Exit reminder if help section not seen =====
+    (function initExitReminder() {
+      let helpSeen = false;
+      let toastShown = false;
+      const aide = document.getElementById("aide") || document.querySelector('[data-section="aide"]');
+      if (aide) {
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach(e => { if (e.isIntersecting) helpSeen = true; });
+        }, { threshold: 0.25 });
+        io.observe(aide);
+      }
+      const toast = document.getElementById("exitToast");
+      const dismiss = document.getElementById("exitDismiss");
+      const go = document.getElementById("exitGo");
+      function showToast() {
+        if (helpSeen || toastShown || !toast) return;
+        toastShown = true;
+        toast.classList.add("show");
+      }
+      dismiss?.addEventListener("click", () => toast?.classList.remove("show"));
+      go?.addEventListener("click", () => toast?.classList.remove("show"));
+      // When user tries to leave
+      window.addEventListener("beforeunload", (e) => {
+        if (!helpSeen) {
+          // browsers ignore custom text; still signal
+          e.preventDefault();
+          e.returnValue = "";
+        }
+      });
+      // Soft reminder: if they scroll near the very top after having scrolled down, without seeing help
+      let maxScroll = 0;
+      window.addEventListener("scroll", () => {
+        maxScroll = Math.max(maxScroll, window.scrollY);
+        if (maxScroll > 800 && window.scrollY < 120 && !helpSeen) showToast();
+      }, { passive: true });
+      // Also after ~45s on page without seeing help
+      setTimeout(() => { if (!helpSeen) showToast(); }, 45000);
+    })();
+
+    // ===== Approximate time on site (1 hit per visible minute, max 30) =====
+    (function trackTime() {
+      let minutesSent = 0;
+      let acc = 0;
+      let last = Date.now();
+      const MAX = 30;
+      setInterval(() => {
+        const now = Date.now();
+        if (document.visibilityState === "visible") {
+          acc += now - last;
+          while (acc >= 60000 && minutesSent < MAX) {
+            acc -= 60000;
+            minutesSent++;
+            countHit(KEYS.timeMin);
+          }
+        }
+        last = now;
+      }, 5000);
+    })();
+
+
+    // Start tracking
+    trackView();
+    trackSections();
+    // Refresh public numbers every 45s
+    setInterval(refreshPublicStats, 45000);
+
+
+    // Count quiz starts (once)
+    let quizStarted = false;
+    function markQuizStart() {
+      if (quizStarted) return;
+      quizStarted = true;
+      if (localStorage.getItem("lfm-quiz-started")) return;
+      try {
+        localStorage.setItem("lfm-quiz-started", "1");
+        countHit(KEYS.quizStart);
+      } catch (e) {}
+    }
+
+    // Patch goNext to count quiz completion
+    const _origGoNext = goNext;
+    goNext = function() {
+      const wasLast = idx === questions.length - 1;
+      _origGoNext();
+      if (wasLast) {
+        (async () => {
+          if (localStorage.getItem('lfm-quiz-done')) return;
+          try {
+            localStorage.setItem('lfm-quiz-done', '1');
+            const n = await countHit(KEYS.quiz);
+            const el = document.getElementById('statQuiz');
+            if (el) el.textContent = fmt(n);
+          } catch (e) {}
+        })();
+      }
+    };
+
     render();
   </script>
+
+
 </body>
 </html>
